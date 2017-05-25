@@ -111,8 +111,12 @@ map.on('load', function() {
     // Set up tooltips
     map.on('click', 'stories_layer', function (e, i) {
 
-            tooltip_html = "<h3>" + e.features[0].properties.title + "</h3>"
+            tooltip_html = "<h2>" + e.features[0].properties.title + "</h2>"
+            tooltip_html += "<h3>" + e.features[0].properties.publisher + "</h3>"
+            tooltip_html += e.features[0].properties.date + "<br>"
+            
             tooltip_html += "<a href='" + e.features[0].properties.link + "'>Go to story</a>"
+
 
             new mapboxgl.Popup()
                 .setLngLat(e.features[0].geometry.coordinates)
