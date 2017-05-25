@@ -1,0 +1,169 @@
+<!-- https://www.mapbox.com/mapbox-gl-js/example/timeline-animation/ -->
+<!--
+TODO:
+      x Adjust marker colors
+      _ Include tooltips
+      _ Include legend
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+.map-overlay {
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    position: absolute;
+    width: 25%;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+
+.map-overlay .map-overlay-inner {
+    background-color: #fff;
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.20);
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.map-overlay h2 {
+    line-height: 24px;
+    display: block;
+    margin: 0 0 10px;
+}
+
+.map-overlay .legend .bar {
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #FCA107, #7F3121);
+}
+
+.map-overlay input {
+    background-color: transparent;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    cursor: ew-resize;
+}
+</style>
+
+<div id='map'></div>
+
+<div class='map-overlay top'>
+    <div class='map-overlay-inner'>
+        <h2>Laundromats in SF</h2>
+        <label id='year_label'></label>
+        <input id='slider' type='range' min='1986' max='2016' step='10' value='1986' />
+    </div>
+<!--
+    <div class='map-overlay-inner'>
+        Laundries: #FFAD27 <br>
+        Laundromats: '#900149
+    </div>
+-->
+</div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q';
+
+var sf_bounds = new mapboxgl.LngLatBounds(
+  new mapboxgl.LngLat(-122.6, 37.67),
+  new mapboxgl.LngLat(-122.3, 37.83)
+);
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/dwasco/cj0n4fxjp003q2rnyu3r18dd1',
+    center: [-122.4194, 37.7749],
+    //zoom: 11,
+    maxBounds: sf_bounds
+});
+
+function filterBy(year) {
+
+    var filters = ['==', 'year', year];
+    map.setFilter('laundries_layer', filters);
+    document.getElementById('year_label').innerHTML = year
+
+}
+
+map.on('load', function() {
+
+    map.addSource('laundries_source', {
+        'type': 'geojson',
+        'data': './laundry_data.geojson'
+    });
+
+    map.addLayer({
+        'id': 'laundries_layer',
+        'type': 'circle',
+        'source': 'laundries_source',
+        'paint': {
+            'circle-color': {
+                property: 'is_a',
+                type: "categorical",
+                stops: [
+                    ["Laundries", '#7AA8C7'],
+                    ["Laundromats", '#7AA8C7']
+                ]
+            },
+            'circle-radius': 8,
+            'circle-opacity': 0.8,
+            'circle-stroke-width': 1,
+            'circle-stroke-color': 'white',
+        }
+    });
+
+
+    // Set up tooltips
+    map.on('click', 'laundries_layer', function (e, i) {
+
+            tooltip_html = "<h2>" + e.features[0].properties.title + "</h2>"
+            tooltip_html += "(" + e.features[0].properties.address + ")"
+
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(tooltip_html)
+                .addTo(map);
+        });
+
+    // Change the cursor to a pointer when the mouse is over the places layer.
+    map.on('mouseenter', 'laundries_layer', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'laundries_layer', function () {
+        map.getCanvas().style.cursor = '';
+    })
+
+    // Set filter to first year, 1986
+    filterBy(1986);
+
+    // Set an event listener for the slider
+    document.getElementById('slider').addEventListener('input', function(e) {
+        var year = parseInt(e.target.value, 10);
+        filterBy(year);
+    });
+
+
+});
+</script>
+
+</body>
+</html>
+
