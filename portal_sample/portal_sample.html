@@ -115,7 +115,7 @@ map.on('load', function() {
             tooltip_html += "<h3>" + e.features[0].properties.publisher + "</h3>"
             tooltip_html += e.features[0].properties.date + "<br>"
             
-            tooltip_html += "<a href='" + e.features[0].properties.link + "'>Go to story</a>"
+            tooltip_html += "<a target='_blank' href='" + e.features[0].properties.link + "'>Go to story</a>"
 
 
             new mapboxgl.Popup()
