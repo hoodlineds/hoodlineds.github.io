@@ -9,6 +9,33 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+
+        .cwWxAq {
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 5px 0;
+            margin-top: 5px;
+            margin-right: 0px;
+            margin-bottom: 5px;
+            margin-left: 0px;
+        }
+
+        .FHMFW {
+            font-size: 14px;
+            color: #7F8FA4;
+        }
+
+        .diJXjD {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1A91EB;
+        }
+
+        .CWbmD {
+           width: 270px;
+        }
+
     </style>
 </head>
 <body>
@@ -99,7 +126,7 @@ map.on('load', function() {
         'type': 'circle',
         'source': 'stories_source',
         'paint': {
-            'circle-color': '#7AA8C7',
+            'circle-color': '#FD7648',
             'circle-radius': 8,
             'circle-opacity': 0.8,
             'circle-stroke-width': 1,
@@ -117,6 +144,25 @@ map.on('load', function() {
             
             tooltip_html += "<a target='_blank' href='" + e.features[0].properties.link + "'>Go to story</a>"
 
+            tooltip_html = '<div class="CWbmD">'
+            tooltip_html += '<div>'
+            tooltip_html += '<span class="cwWxAq">'
+            tooltip_html += e.features[0].properties.title
+            tooltip_html += ', ' + e.features[0].properties.date
+            tooltip_html += '</span>'
+            tooltip_html += '</div>'
+            tooltip_html += '<div>'
+            tooltip_html += '<span class="FHMFW">Source: </span>'
+            
+            tooltip_html += '<a target="_blank" href='
+            tooltip_html += e.features[0].properties.link + '>'
+            tooltip_html += '<span color="#1A91EB" class="diJXjD">'
+            tooltip_html += e.features[0].properties.publisher
+            tooltip_html += '</span>'
+            tooltip_html += '</a>'
+            
+            tooltip_html += '</div>'
+            tooltip_html += '</div>'
 
             new mapboxgl.Popup()
                 .setLngLat(e.features[0].geometry.coordinates)
