@@ -1,0 +1,2145 @@
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+
+<div id='map' style='width: 100%; height: 100%;'></div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q'
+    map = new mapboxgl.Map({
+      container: document.getElementById("map"),
+      logoPosition: 'bottom-right',
+      style: 'mapbox://styles/dwasco/cj0n4fxjp003q2rnyu3r18dd1',
+    });
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+
+    onMapLoad = () => {
+        isMapLoaded = true
+        map.addSource('points', {
+          type: 'geojson',
+          cluster: false,
+          clusterMaxZoom: 16, // Max zoom to cluster points on
+          clusterRadius: 2.5, // Radius of each cluster when clustering points (defaults to 50)
+          data: {
+            type: 'FeatureCollection',
+            features: [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.43925000000000125056,  34.02268000000000114369]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Um8lQ4bSiP7mHJko_KDkng<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-23?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13109144585.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.29107165336600360206,  34.07014245901729765365]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Qk-Ejx3bSH1E5Bnih9ND2A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-220?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133846552.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39611800000000130240,  34.14457300000000117279]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: EDROEKWx8DOedPUnYaxneg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-275?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44363529466400564161,  34.12802294188679752551]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _VFRQGIzB87R2OHR5sIOEA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-26?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104708121.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.35389499999999429747,  34.06282300000000162754]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 9rxP6VDpS4D8S-Vun-VZGw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-196?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239311013.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.33893123340999409265,  34.06190952744699984578]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: fn0d4TtMb1AaSOoNdNoYzQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-142?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239362989.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25712294113900213688,  33.98795623891899708724]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: merpERKMMf6MpAUDYq9vZg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-286?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13235211535.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25441741943400586479,  34.04872131347659802714]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 40WrN2hfvAIt1zq2drV3hg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-90?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133270208.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.34482500000000015916,  34.07573299999999960619]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: tZUpr0Fj0xl47BZN3Xf_6g<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-105?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239391793.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.37613010920600231657,  34.04635255619089662105]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DlZUntgqUguu3xWhzN7kjA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-396?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.46656783106099908309,  34.17502103199070262463]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: nIvMzpUg4od8bIUtek1mkg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-330?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18187790163.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39672799999999597276,  33.95643900000000314776]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: f846x43JA9GZp3oHu-5USg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-411?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106452035.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39219768949600108954,  33.97770357575179644982]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: GQWy0jqLm3jSMGmyw26OWw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-51?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106455012.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.43543590000000165219,  34.04841629999999952361]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: QIUem1mebltOt0_HncXc6A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-118?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104708494.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25701738125499673515,  33.98745895460790222842]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xnjMlymnA1KJbm1gu0QDQA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-362?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.46934000000000253294,  34.06443000000000154159]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: t0vFrIyqX6N5mAT3d0YV_Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-20?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104727119.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40406272600300496833,  33.94627037272920233590]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ViJSK88Ug39ruabjT0U9vg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-80?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39672088622999979179,  33.95675659179690342171]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: qLlniG4grr_Tw7d-msd1_Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-101?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13103420152.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.37144999999999583906,  34.15892000000000194859]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Rb7fN4y7WnRIWnNsLAadyw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-407?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18182993072.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25520000000000209184,  34.05165000000000219416]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: NhNRRy5cILhBvW7h_tgHUg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-100?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136224493.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.32249936670200440858,  34.09740972314219931150]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BnN35I-aGgksKsZ3CipI3A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-145?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234676404.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.55673635156600198570,  34.17301601343670114375]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 50eoCSe-uoREy3xRBzYy1Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-269?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18187749660.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39761972427399427943,  33.94283481341140173981]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 7_qJDQBaXTbupxNBcT3JsA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-82?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.23909709999999506636,  34.04840920000000181744]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: mpfQPJ6hStmmlsaYT2on2w<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-189?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136130393.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.37743157460600684772,  34.07555900314469710111]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: oUwJ5kQA1TvOJRmLtlelEw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-130?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13103580161.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.38345999999999946795,  34.05501000000000288992]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -POLMllppphtJUy4BaKOWw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-88?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13108609364.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.53555688885100494190,  34.23516648688089958341]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: p7VA6USrKfrXjeZT3GhOpw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-310?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18189931472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40240679999999429128,  33.94505430000000245627]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: wBqfmVOXEpaEmGd60lxT-Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-384?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25263559818300507231,  34.05255719677300163539]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: P4Rd3ii8tH2HV63xo2CmAA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-209?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136201945.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.42208890000000565124,  33.96815140000000354803]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: lfnvc4ghavgSKzkrkGeQEw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-401?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13103385369.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.53440856933599434342,  34.16887283325200286299]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gKq5QtcAZSWcVALy5BMBtQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-270?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18188815527.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.20610329999999521533,  34.06021109999999652018]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: IzQfDov4ezSwCFoC_qldrw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-192?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234421943.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40052239999999983411,  34.03124400000000093769]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: wXuabqfpviD1TjQREBIR4g<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-56?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13108391483.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.35092899999999360716,  34.06292700000000195359]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ZM5GOG2J1fGrzVOM5FgxVg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-329?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239364954.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.34400840000000698637,  34.05192890000000005557]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: huP1osTNvjU0A0Wt-iX4mg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-76?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239342408.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.41292500000000131877,  34.05864700000000055979]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: X-sOYMIH0xEd-4mQIhZs9A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-115?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13102863023.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.58026999999999873125,  34.25686999999999926558]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: EHPYZGCS4l_8FG9ey3TDXg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-413?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18187009937.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.57877075672099920212,  34.25710559840320001967]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3vYgEDUaBoqpH5uZZOBMtg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-211?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18183417151.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44803000000000281489,  34.15464990000000256032]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PL1K6ugwBIucg8AufFk-vA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-420?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18182989438.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.46635736525099957817,  34.05363008379939770975]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kInZh4MXgtq0VTiO0YZsmw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-19?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13102074202.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.32717130000000338441,  34.08422089999999826659]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: LGmCSZuM9h0yYk_QWA504A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-215?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234614167.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25345000000000084128,  34.03967999999999705096]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: OTrEbssKZuEOhEx3Zc_7Fg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-65?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12134890913.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25657844543499663814,  34.05294387179269932631]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: uept-wmcz0yFJ2XjgrDgkA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-111?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136239191.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39596304139399762789,  33.95603009564680263566]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Tg5ECzjWDL_CMaTw0GI17g<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-45?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106450416.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39288830757099901803,  34.02714389367429959066]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: y1RSPU_WQjlJhu41iuqSLw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-36?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13105580407.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.36047999999999547072,  34.07207100000000110640]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3Q4SiOJfMp7NjgdkGM7jRA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-148?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239659594.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.30768927931799794351,  33.95936327211269656345]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: iZDE1-mE9aZ58akzsmT2YQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-422?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25346999999999297870,  34.05340000000000344471]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: RGW_x6rZitI6wyMBRY52ew<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-137?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136214191.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40240479999999934080,  33.94505310000000264381]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 5NrnWItJ1EC7LoFd_qvORQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-200?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.43007660000000669243,  34.03968050000000289401]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: qf43yPlFw42CD1QMcPcOSg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-202?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104708863.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.42007711712399498083,  33.96178548914969752559]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Lso7EGN4Z0caCzryLZpLJA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-394?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13105601760.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.18334099999999864394,  34.11476499999999845159]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Xa-pqPoYe8-ka4gT3BYEpw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-306?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234787365.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.23551054211999655763,  34.05623242704469788578]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: EbklHzRB_1SvnZtRggPGzg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-207?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136212862.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39759021997500099133,  34.05513833022730096900]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: uRcc4SOAPdMlaPjhXfSPRQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-353?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13102712672.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40013890000000174041,  33.94559100000000029240]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ZPWNht8Zhxz44ntH8WINXg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-266?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.41697999999999524334,  34.05881999999999720785]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: eJ7JZ38xcfuYl7bPOr3UeA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-138?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13105570785.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.43373583640699564512,  34.00328015911210144395]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 1F1PysQR3I3SuSOwVbn87A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-352?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13103902354.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44087330000000690688,  34.03821719999999828588]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gvbBCNIEaFkYJ0AEFNCvNg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-259?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104780045.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.22402999999999906322,  34.14133000000000350838]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 1UmnjvOUKU-lSAMKda4J_w<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-238?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13232581355.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.28797912597700303650,  34.09739303588870029671]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ic7MqGFDiLYDjgqBEUiYXA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-339?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13236628107.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.31282000000000209639,  34.25992200000000309501]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Xd7daLmSTK3In8rJtnCdqg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-312?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18189533616.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25510952736999570334,  34.05145618921699934845]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: iRdsUau12gWIjSZwr_QuRQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-102?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12134889049.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.55159126222099530423,  34.04494917377199669772]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: rsjRiZ9dHmTGJDyAG_m5Vw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-282?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13105734138.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.35830808036800476657,  34.07202447906109910036]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _LlKzp4M7p9PxDcz1n4FvA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-373?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.28246176242799947431,  34.02125734112760113703]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 9kH8Sts6pLrb4bI_crM_xQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-240?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25139617919900558718,  34.05165863037110085543]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3UznovxeR5H1kdMOOZf5_A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-134?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136260466.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.60548000000000001819,  34.19859000000000293085]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kH_MahvpGdtrSu27acPmrg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-424?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18184563048.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.53708094832499853055,  34.25662183877079769445]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xV7-UDU8NkWu9JKUjw4PPA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-337?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18187096934.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.33496510000000512264,  34.01910800000000278942]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: G_eNch6C6b8nFbvLMG4KXw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-86?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13232927911.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.50344850000000462842,  34.23455810000000099080]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: G6bwriZGgIpBp95E-yGKaA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-217?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18189249001.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40519700000000113960,  33.93806800000000123418]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ykORoyigj5OZWURd4RC6ZQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-361?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13109485066.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.35474628955100229177,  34.02077854059899664207]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Wf-0gQTzwuN5JoEIHO3kwA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-320?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13232920633.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.27013379999999642678,  34.05550939999999826568]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 1aV1to9qqjgT0zI5GlsEBg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-119?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12134840958.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.32358069717899695661,  34.07472364604470271843]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 2YDeRPINipVdFZm2lgavEA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-93?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234691081.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.29137420654299717171,  34.10200500488279828915]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: p98gGan98KLIffAKaMw3Zg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-94?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13236627705.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.36522089848699579306,  34.09767367931910087009]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 68FHBVrGF6oe3AqZhGC_wQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-117?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13236561812.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26650300000000015643,  34.04504599999999925330]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: nSfOozY7KM67amvWUhXlVA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-85?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12137481009.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39964979196800243244,  33.94138622488340217842]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: NLwanTdM0Yps_wKbho6xHA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-38?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.52107238769499986120,  34.16259765625000000000]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: GEbfnH6Ima_2iwGAfAgbPg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-391?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18183456882.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44854949999999860211,  34.03387370000000089476]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _SpZQdqxb6O65vAbm4CKmg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-271?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104735238.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.34541320800799724111,  34.06263732910159802714]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: B3oFcLfDQmNSFE1oCduSXA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-83?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239392071.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44099439680600482916,  34.03799749910830030331]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: XrSQO84GBPI9DAorcETqSg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-261?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104780045.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.29083559999999408774,  34.06917490000000015016]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: IzlkFLLuRGSdQ_LyQT26dw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-348?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.42749619999999310949,  34.02613389999999782276]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: yG9qalpyE92fjjiSlmlbJA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-18?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104778717.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.34308974444900286471,  34.09801058471200008171]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: aGMNfep4WtMi3hSu4-vXAQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-135?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234696994.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.24202297205400213898,  34.04931950798329864938]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 6cFq3TwvkYrEnhGwWHwV4w<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-404?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12132661207.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.42832810000000165473,  34.02718190000000220152]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BiQarjef-TbH1Yiy6d2s0Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-375?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13109630098.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.29079706221800449839,  34.07000581733419863895]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 83jLGOa4TKiy56yYsKxBKQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-419?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133846552.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.41491999999999507054,  34.06101000000000311729]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: qcdUOqVRO846IDhNhk6wuw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-29?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13105538226.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.38000399999999956435,  34.07654500000000297177]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: F7bZ4Tb-pL796rdpQVpcYg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-77?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104236258.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.24263763427700268949,  34.05055999755860085543]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: MEsACQ6JZRxG82qLsoUN3g<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-144?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136879849.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.24029344180699752087,  34.05878258090619681298]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Z9IzbIm08iuW-PvuY6iSbQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-346?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136807825.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.24917000000000655291,  33.98220489999999927022]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: FkmmAZYN6o3gyE3FboqPHA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-167?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13235851928.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39678607019300216052,  34.17196801172990205941]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: hyi5sy3jM2x1-fLs8DVpAw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-377?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18182994968.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.37157999999999447027,  34.02691990000000288319]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 5Sm9a_dNqVZW2HPXbOjNVA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-338?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239380821.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40240479999999934080,  33.94505310000000264381]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: htqkmPH0WKpDq52Al2ubLw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-344?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13019476703.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.37200986089399634693,  33.97768148236630025849]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: KdK76V3112QZ38jNiBaU_A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-89?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13103381297.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25587905943399391617,  34.05153863131999969482]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: OwFPp77-KEi3uTGCs-ghMA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-264?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136224493.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.43158721923799703291,  34.04319381713870029671]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: v_IoWH8feN7ksO6rd78KQw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-99?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104419002.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.24723464001100126097,  34.05630423511019699845]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3wC97OVl-UtkfX7GotYg_w<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-412?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136252205.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.32640990000000158489,  34.09783039999999942893]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: lUZvVCJBIK-5IY3pxZEukQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-308?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234641859.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.33051000000000385626,  34.04019000000000261252]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: p6H7zDrApPSvYL8sbrd_mA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-97?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13237340281.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.37018743157399569554,  34.11099926277159966048]
+    },
+    properties: {
+      description: 'Starbuck Toluca lake<br>yelp_id: vuaVGEEPOgRtnNBrwLSW8g<br><a href=\'https://www.yelp.com/biz/starbuck-toluca-lake-los-angeles?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40725139325699899473,  33.94629386433179973892]
+    },
+    properties: {
+      description: 'Starbucks Terminal 3<br>yelp_id: NlPgc7wHL2CFu5t7Y43-5g<br><a href=\'https://www.yelp.com/biz/starbucks-terminal-3-los-angeles?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26295000000000356977,  34.11654990000000253758]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: sJ-78DoiZPngg53vMrKg_Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-64?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13236671457.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.34148951030699947751,  34.10179854804670185331]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 5ZDBBAsRtaX09dkGxJWJCQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-199?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234621602.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.12449999999999761258,  33.97547000000000139153]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: fV_YUjs3St8a31eUzh2JDA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-104?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13237258774.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.33745000000000402451,  34.04811999999999727606]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 20J1QsHJ6IDxHaWvEoPVgA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-58?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239365032.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26351408325399461319,  34.12654402391800090300]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: T2bY5PNmMX3LPXdVeWp4-A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-143?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13236651347.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.29362143472400248356,  33.75998228204060325197]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: v_84sx4xof3Qv_HDrubSMA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-393?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13102141561.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.21502365171899384677,  34.13918799608109821975]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: pUxoFW5cdE_BqsHmSbHnPg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-98?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13233490671.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.18931600000000514683,  34.13616600000000289583]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: jGv_Q461OGGx3fYsuB_p6g<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-347?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13232545716.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25189000000000305590,  34.04912000000000205091]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 86hk8ZoiIk7-h8vWhG9dSQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-364?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133935383.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44530399999999303873,  34.04756710000000197169]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PJ3AnFKw0EBhKKg7htmM9A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-31?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13103122903.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.41852083802200468199,  33.95838967552280251994]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 4G3kFF_nTSm9w2eOVR9kFg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-355?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106491526.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40240479999999934080,  33.94505310000000264381]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BCMrxSazTYM92zCeQbW4xQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-371?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106464054.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.60690680062199930944,  34.21796648789609918140]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: HK6v4jVPKR0rart0qj6cWA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-278?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18187035959.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.28388228747400034990,  34.06390163664659809228]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kIEkJIKyy6G_j8mMN8wzTQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-398?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12132154691.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.29134997607199863978,  34.06174459674429755296]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Ds-ciFN3K_T4F9geOD7FWA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-350?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133843578.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.22021484375000000000,  34.02478790283200282829]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: CL50Xjsw93oEKofa_JWxmQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-298?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13232653457.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.33892822265599420462,  34.08686828613279828915]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: cf7niqvPU620lKbEvzVaWg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-369?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234931868.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26228280746700249892,  34.04158430030970095004]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: MIqXf35_1EOJAqllf0soAg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-125?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12137491751.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25885999999999853571,  34.10405000000000086402]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: O7FjiWCKHe5XAlnTRvzDaA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-91?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13239133506.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.41069224792599356988,  33.94136875772240102833]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: XR0t_hS9Wm_jTdRwono_jA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-276?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13109485066.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.30901442840999493455,  34.10189701353200320000]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: VxNpDZRIxDFU40HbcyIP8g<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-123?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234625506.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40659439563700061626,  33.94025805372839954543]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Ulfc9Fe-G2GBB1XZvfpHsQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-224?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13102589607.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.30636241473000325186,  34.06156032282599710470]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: tE76daU5hUPb8cwQzSZwqQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-110?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133835370.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.38732238858899847855,  33.94602839630770318990]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _LXjYqkt8fHkTGiwN6XHQQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-363?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13105687730.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.33702850341799717171,  34.10550308227539773043]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 2Utf2LznAtU651FpyQYUuQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-335?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13238507360.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.58910799026500626496,  34.23692939662070244822]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: EKdmJYnXBqyABJ0K41Yc5g<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-214?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18187178593.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39078000000000656655,  33.94653000000000275804]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kkj_2X_u0-P2ZxmmRvC6Fw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-194?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106424803.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.39679999999999893134,  34.17173999999999978172]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: rngZGWS0AiRvn4G5DVijOw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-386?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18182994968.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40115115700000103516,  33.94594183910000140258]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 8Cw7shX-_d3dOXlOQwo47Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-367?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25453000000000258751,  34.05102999999999724423]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -TUmhKUX7oJmKNcl9eUY4A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-132?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136238400.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44468878953000512411,  34.05944889198799785390]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 2vHT7_RU0QC1hUSBnqqYvg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13102085505.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40240479999999934080,  33.94505310000000264381]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: KHz3yU9kGESDMVkGAuS1Pg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-229?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106659445.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.43008422851599448222,  34.03968811035159802714]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: jjEfTvZUkIHRzYQLMQefJA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-107?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13104708863.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26326460446999533360,  34.05210283785500280374]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: vxmZExbOHXwcCm9P7Pg3gA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-66?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12132508291.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26080542981199528185,  34.04920673608110348596]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: YIOqbSDwN2gZ-LdtBk_0Mw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-127?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12134889902.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.28157806396500006940,  34.01866531372070312500]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: C8xsHOj5XNNZu3zQCpdkrQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-233?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12137499302.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44739660000000469608,  34.06249710000000163745]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: meXU5mzbXhnpjFjEtEaoqg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-17?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13102091626.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40119934081999986120,  33.95309829711909799244]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: p0pQuZdDXBTqV6zNEb8L-A<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-392?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40240479999999934080,  33.94505310000000264381]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 5C_Fh4iQMJAFDmyBROXjOg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-197?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.24986856430800230555,  34.05400388564319769102]
+    },
+    properties: {
+      description: 'Starbucks at Colburn<br>yelp_id: S0XPDGHvem_y4015EBx1Nw<br><a href=\'https://www.yelp.com/biz/starbucks-at-colburn-los-angeles?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136214515.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.34850129999999523989,  34.12951809999999852607]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: XbqC5PW0LL6pVf2O1r_K_Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-336?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13238768032.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.31155819999999323500,  33.98899509999999679621]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Rnabo5kFY453KF9pfcUziQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-103?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13232924429.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.37348937988299724111,  34.02280426025389914457]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: jNw4En4vmT-14YTM2dBPnA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-79?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13108951131.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.34445499999999640295,  34.06689599999999984448]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ipRZp8yl-1WW7q6Kq0GkUQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-409?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13236275619.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.27309718085899703510,  34.10768291683719866114]
+    },
+    properties: {
+      description: 'Starbucks Coffee<br>yelp_id: V1sXO6aTg7TPaerHwGZBZg<br><a href=\'https://www.yelp.com/biz/starbucks-coffee-los-angeles-142?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13238289251.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.33723791371500055902,  34.10174602363829876595]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: vWvLKWWEGvGRtU9ynU48QQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-250?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13234675534.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44361877441400565658,  34.06310653686519884786]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ehofu7XpWLs5A8PZ9rYlFw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-328?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13108932360.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.35617065429700289769,  34.08343505859379973799]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: x9jbQAETId6xyxMjq-uyGg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-149?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13238529690.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.21957000000000448381,  34.12342999999999904048]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: WJlmgkm4lrbzVJysiyY99g<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-146?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13233408059.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.27754345834800631110,  34.02658609048700100175]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Ik5tKOhppa76EFJ_xpXcSQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-358?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136185477.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.60440731048500140332,  34.19086076458920331334]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ZWA0C-esrQmDsjf2Z_8LsA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-222?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18189992653.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.23943034532000240233,  34.02534410303209710946]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: UoiRAxHoIQGau-NlFfKr-Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-403?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133349270.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.29956400000000371620,  34.06151899999999699276]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 6Qs1U9MgxwRm7TB3Y6Teeg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-237?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133823351.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.46000799703500661053,  34.21290583047250066784]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: vz710UJ6aJZFbpL9w8QrvA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-280?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18189221001.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40387099999999520605,  33.94699099999999702959]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: pY7BFrhuhRd61LY0tZHf5w<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-204?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13016463472.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.38724875875199415987,  33.94604218907930004434]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -4zE7H2lK53hbosBwH4lEQ<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-249?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13106415700.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.55420705553399329801,  34.23799616218430230674]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: o3OG6CisUIhBwCsnvaPqYg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-406?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18187734628.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.44913743274200612632,  34.19501663760569698525]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: qK0vZ_8b7WLDatClYIjJKA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-331?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18189889180.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25346899999999550346,  34.05010800000000159571]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: mbhTqb9oBku6Lrp7qRvjOw<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-109?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12138920306.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.25120603430400478828,  34.04594675670109893417]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: VilfzV9B8v8P1ZAWDob_5Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-234?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12136232751.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26043076813199661501,  34.04889866709709878023]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: XHgaiRvYg98WzXyhoGfVcA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-242?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12133304543.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.36168059999999968568,  34.09096410000000076934]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _E-qAnW9mBguXnu7dzFiBg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-59?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13238229733.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.17167849999999873489,  34.06241750000000223508]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: UR6K77i61JN__IMAhXp6Tg<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-70?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13233435370.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26134490966799717171,  34.03946685791019888256]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ffIgVsjZxfw6LcMAX1I0RA<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-121?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12137490487.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.32601999999999975444,  34.04023999999999716692]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: E-_NtEsnwxrMfqb5_vIW3Q<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-193?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12122467699.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.26139999999999474767,  34.04579999999999984084]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: lU057eF5L8-jmPUiv0aU7w<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-221?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12132399713.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.40897369384799731051,  33.98166275024409799244]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: tYpR0tDfAkbR7oyLcgSKng<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-37?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13108233479.0',
+      colorby: 0.000000
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-118.41148130000000548989,  33.94892360000000053333]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: O6auU6HvTh1jW-DZrw7L2w<br><a href=\'https://www.yelp.com/biz/starbucks-los-angeles-71?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 13016463472.0',
+      colorby: 0.000000
+    }
+  }],
+          },
+        })
+
+        map.addLayer({
+          id: 'points',
+          type: 'circle',
+          paint: {
+            'circle-blur': 0.1,
+            'circle-radius': {
+              base: 2,
+              stops: [[11, 5], [14, 8], [22, 180]],
+            },
+            'circle-color': {
+              property: 'colorby',
+              default: '#FF7616',
+              stops: [
+                  [0.000000, 'blue'], [0.000000, 'red']
+//                [0.0, 'blue'], 
+//                [400, 'green'], 
+//                [800, 'yellow'], 
+//                [1500, 'orange'], 
+//                [13000, 'red'], 
+              ],
+            },
+            'circle-opacity': 0.7,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': 'black',
+            'circle-stroke-opacity': 0.5,
+          },
+          source: 'points',
+        })
+
+	map.setCenter([-118.35750710588621, 34.05674696507621])
+        map.zoomTo(11)
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'points', function (e, i) {
+
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'points', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'points', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
+    map.on('load', onMapLoad)
+
+</script>
