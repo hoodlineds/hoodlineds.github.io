@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AVUXI Widget Demo</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  <style>
+    #map_canvas {position: fixed !important;overflow: hidden !important;top: 0px;left: 0px;right: 0px;bottom: 0px;border-radius: 0px;border: 0px solid white;}
+  </style>
+  <link rel='stylesheet' href='https://unpkg.com/leaflet@1.0.3/dist/leaflet.css' />
+  <script src='https://unpkg.com/leaflet@1.0.3/dist/leaflet.js'></script>
+
+</head>
+<body onload="LoadMap();" style="background-color: gray;">
+<div id="map_canvas"</div>
+
+<script type='text/javascript'>
+  var map;
+  function LoadMap(){
+    map = new L.map('map_canvas').setView(new L.LatLng(37.763424, -122.438814), 12);
+    L.tileLayer('https://api.mapbox.com/styles/v1/dwasco/cj0n4fxjp003q2rnyu3r18dd1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q', {
+      attribution: 'Map data © OpenStreetMap contributors, CC-BY-SA, Imagery © CloudMade',
+      maxZoom: 18
+    }).addTo(map);
+
+    var sc = document.createElement('script');
+    sc.id = 'vxscript';
+    sc.type = 'text/javascript';
+    sc.async = 'async';
+    sc.src = 'https://m.avuxiapis.com/v1/s/72a8185a5c111?callback=avapil&ln=en';
+    document.body.appendChild(sc);
+
+  }
+
+  function avapil(){
+    AVUXI.MapStart(map,'72a8185a60293');
+  }
+
+</script>
+
+</body>
+</html>
