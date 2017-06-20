@@ -1,0 +1,2557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+    .filter-group {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        border-radius: 3px;
+        width: 120px;
+        color: #fff;
+    }
+
+    .filter-group input[type=checkbox]:first-child + label {
+        border-radius: 3px 3px 0 0;
+    }
+
+    .filter-group label:last-child {
+        border-radius: 0 0 3px 3px;
+        border: none;
+    }
+
+    .filter-group input[type=checkbox] {
+        display: none;
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        text-transform: capitalize;
+    }
+
+    .filter-group input[type=checkbox] + label:hover,
+    .filter-group input[type=checkbox]:checked + label {
+        background-color: #4ea0da;
+    }
+
+    .filter-group input[type=checkbox]:checked + label:before {
+        content: '✔';
+        margin-right: 5px;
+    }
+</style>
+
+<div id='map' style='width: 100%; height: 100%;'></div>
+<nav id='filter-group' class='filter-group'></nav>
+
+<script>
+
+    function adjustFilters(map) {
+        var input1 = document.getElementById('input1');
+        var input2 = document.getElementById('input2');
+        var input3 = document.getElementById('input3');
+
+        filt_list = ["any"]
+        
+        filt1 = ['==', 'chain_name', "Dunkin' Donuts"]
+        if (input1.checked) {filt_list.push(filt1);}
+        
+        filt2 = ['==', 'chain_name', "Starbucks"]
+        if (input2.checked) {filt_list.push(filt2);}
+        
+        filt3 = ['==', 'chain_name', "Au Bon Pain"]
+        if (input3.checked) {filt_list.push(filt3);}
+
+        map.setFilter("points", filt_list);
+    }
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q'
+
+    var filterGroup = document.getElementById('filter-group');
+    
+    map = new mapboxgl.Map({
+      container: document.getElementById("map"),
+      logoPosition: 'bottom-right',
+      style: 'mapbox://styles/dwasco/cj0n4fxjp003q2rnyu3r18dd1',
+    });
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+
+    onMapLoad = () => {
+        isMapLoaded = true
+        map.addSource('points', {
+          type: 'geojson',
+          cluster: false,
+          clusterMaxZoom: 16, // Max zoom to cluster points on
+          clusterRadius: 2.5, // Radius of each cluster when clustering points (defaults to 50)
+          data: {
+            type: 'FeatureCollection',
+            features: [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16057000000000698492,  39.93151999999999901547]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: X2JkEvWPO7_dEPHne7qJKg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-36?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154637674.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.21386146545410156250,  40.00233084346380252327]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: N3wKFf3q6vJi0g5g0Y1ICw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-104?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154773970.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.22059631347660513256,  39.91444015502929687500]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 78SC5zwpFN7rFfboLI5LMQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-49?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153652101.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.23155975341799717171,  39.95884323120120029671]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: WbxPdq_PgVvCI462l0vPEQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-33?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157481500.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15044935047629337532,  39.91184413433069977373]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: DqMK22MKFgpUfmgzMH3G5A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-67?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157550995.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15349891073799426522,  39.95134641538520270387]
+    },
+    properties: {
+      description: 'Dunkin Donuts<br>yelp_id: sK5NVMGemuoesaFBssdhTA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-162?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17989061772820491569,  40.03237523138520259636]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: PQIEnnLt8UicrQr1GOGarg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-123?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159254433.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.05456999999999823103,  40.03119999999999834017]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: C73iFAmwEntIONkbd5fOuA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-32?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153314594.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16249716281889448055,  39.95237901806829938778]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: gZkT5f8_7-J5dQQJQgnY5w<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157511451.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.03614000000000316959,  40.03878999999999876991]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 0jJf0DNHvYI0itdQSezsgg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153353155.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.03234989999999982047,  40.07524990000000286727]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: o7mN59QlAoL6dJctc014MQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-71?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156718400.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17993529999999680058,  40.03250700000000250611]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: _lzdvo1_8RSiseYQOMozKw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-82?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159914647.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16405016183850307243,  39.94996704161169986946]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 6P_yP44Rr2R2fhuD80HYsw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153362226.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16546630859380684342,  40.05858993530269884786]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: aCymbZBHbKW5Cdty3s5Zvw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-19?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152249822.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16689759999999864704,  39.95397919999999913898]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Q5EWliKC-Y3cfSAYLc6CFQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-73?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152418789.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.24751279999999553638,  39.91693120000000050140]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 0pkUtadXXq_kr9Q3RT9mYw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-126?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153314594.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14199829101559657829,  40.05428695678710226957]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: cLNyFQ3T7p_Kcf09IburKw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-16?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152243976.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.20217900000000099681,  39.95468499999999778538]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: a0rBn7usm4HTnPcz_Angmw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-153?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152441344.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.00825565752120382967,  40.13467000082999902588]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: p2SakAsYqdAvLqPpAhkekw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-159?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156776084.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.02925869999999974880,  40.05691910000000177661]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: G5JYueJhW7eupiQSlJQsqA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-24?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156761477.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-74.98540496826170453915,  40.06367874145509944128]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: W3XUQEn7v84t_6uz829ATw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-99?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156320999.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.09570309999999437878,  40.00574110000000160881]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 7z7cvEaowLgSM2uMDlL7Og<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-136?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155351378.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.04046119999999575612,  40.08710969999999917945]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: X3Qa-dXb2DFdZZ2UnAfSVg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-81?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154648444.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.01747129999999685879,  40.11948389999999875499]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: olqTsVDufyeaqXx585Uv2Q<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-12?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18567729497.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.08404541015619315658,  40.01702880859379973799]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: fWTt8WnG951fX4B3ROXlog<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-15?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158853688.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14176368713380327335,  39.99224737286569819616]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: QeQXcZQdqwJTvGLiou-mvQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-31?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154271600.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.13499450683589486744,  40.01295089721679687500]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: FJnDOv6S1nRFQzbn2RQezQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-86?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152281257.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15215000000000600267,  39.97088999999999714419]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: GhZPG8SiQDfa9V8MQXpJrw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-30?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157694700.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.11169739999999706015,  40.04094469999999716947]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 9yiLfB1OuY8dRrNKtTXOQw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-101?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153428262.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17355346679690342171,  39.95236587524409799244]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: b2WN3yA79dMvCUMywM3I_A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-46?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155750575.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.05147784948350420109,  40.02165041863919725529]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: aaSl3yRcAMAsTLuUP3d0yQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-63?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153354299.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14277648925779828915,  40.04492187500000000000]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: MPpn5R75oldyaJjpizhUiA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-34?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154242962.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16275787353519888256,  39.95464324951169743372]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: nk5N0UmdcCeGUYeEeTheXQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-70?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155646040.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15570111572739619987,  39.98924242285570329614]
+    },
+    properties: {
+      description: 'Dunkin Donuts<br>yelp_id: Wx310O4YAw2XwYnt3JVHng<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-161?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14804077148440342171,  39.94131088256840200756]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: XaBOwJFCe1odBPYdIwCsPg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-156?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-74.97604370000000528762,  40.09616090000000099280]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: HUKonj6akIK8G8W6glML-A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-116?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156324919.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15924839999999562679,  39.94844820000000140681]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: PxwdZDfO9AMFxUYjedhV3Q<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-160?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159251919.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-74.97052140533919839527,  40.08566468954089856425]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: gMvLXZUFb7dFT1_B_vknKA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-88?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156120566.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16717500000000029559,  39.95362800000000191858]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: e8fO-VnHYMM1hBdsn-KOeg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-143?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157511602.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17833000000000254204,  40.01509990000000271948]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: jfR71r70iF-SF0aSpa3dPQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-64?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158481171.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15067290000000355121,  40.00944899999999648799]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: b70q5FBDaEms9J-0BwBXow<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-20?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152289666.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19620390000000043074,  40.00962990000000019108]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: cCLINaXaTfB1grCOBfnY1Q<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-69?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158446440.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15433502197269888256,  39.94942855834960226957]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 2owewxu5r6mLfKv6BBV3Aw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159222857.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15922847067270140542,  40.04336231855049987871]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 6yXQIqM6397s8VY0jutUFg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-154?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158441290.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-74.99338480000000117798,  40.04679660000000041009]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: U4hibwdvk2pACJeo6FaoIA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-53?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156121008.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.11954059999999344654,  39.97728039999999793963]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: BFPxxguGxBZQ0kR0rWePTQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-131?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156347750.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.11236999999999852662,  39.99600000000000221689]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: ht8lG0gs4-ddM7ap3wwIaA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-68?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156343336.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.07680511474609375000,  40.02159500122070312500]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: dCoQI7uP3KkKQQTEDn-xuQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-14?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157442456.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14499038457870483398,  39.92770805954930324333]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: KQkodFGP0PUU9nLmeBFA0w<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-119?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155459677.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19388437271119585148,  39.95713524520400028450]
+    },
+    properties: {
+      description: 'Dunkin donuts<br>yelp_id: cxEquxaUJrhHu2OWoIJy7A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-166?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.26967989999999986139,  39.97946000000000310592]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: -sRtgVuwRz7JJQaHiLV9zw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-78?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158787500.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.06810000000000115961,  40.01349600000000350519]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: hStzfcE4a0aWWEr2_Bjcsw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-118?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152897106.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.02592900000000497585,  40.07687599999999861211]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: bh60ZTqnciiH3FlTUJ-6iw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-45?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156719117.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16715999999999553438,  39.95048140000000103100]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 2AqEWqRbKhcY-30b9geCRQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155698337.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.22733999999999809916,  39.89694999999999680540]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: eO5MbK-ujRQMwLWqbAMqrQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-103?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153656251.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15296969999999987522,  40.00221870000000023992]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: _xRXDraCnehWW4mpMsfP2A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-87?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152261564.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16725158691410513256,  39.95352935791019888256]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: M7qv_LrFhOb-OIl0ma4DSw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-62?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157511075.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17175949999999318152,  40.08115620000000234313]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: VsFoF_AzglUtSQy5ZvDbKQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-89?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152423660.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17410639999999943939,  40.01935050000000160253]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: mO_QmDdeC3mXzd1EVvL-JQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-77?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158483703.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14432580000000427844,  39.96113379999999892789]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Z4Bg-Z-_ld2onuMdbOvv6A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-91?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159232515.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.05718229999999380198,  40.05155940000000214241]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: bJodYUhoZb-ewnzZS-d3Bw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-25?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157456155.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15195876359939575195,  39.95067869254599912665]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: GpOC-e2vWYi1gADV1SI8eg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-164?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159226447.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.12309299999999723241,  40.00680499999999994998]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: YJ4jzBFJU2EJhM-zatdLRQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-128?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152919674.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.13185882568359375000,  40.04855728149409799244]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: tVw70p59Qew9vAmX10XEXA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-51?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158440924.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17689031555559608933,  39.96259008014300206924]
+    },
+    properties: {
+      description: '6ABC Dunkin Donuts Thanksgiving Day Parade<br>yelp_id: FSsBUhbhEBE9N9tJ3V3bIg<br><a href=\'https://www.yelp.com/biz/6abc-dunkin-donuts-thanksgiving-day-parade-philadelphia?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.13098069999999495394,  40.03347279999999841493]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Rp2aR8OYSshxT0IAamQrgg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-55?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159240317.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.06853368927420433465,  40.03517085983239809366]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: PLF2u-SwLHeA2Nc1Ohpdjg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-113?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155352349.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16602050000000190266,  39.95124590000000353029]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: uciHEAg4k11yDPI_K8-CrQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-93?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156360910.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15310071408750047794,  39.92365993559359793608]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 5qOu7c8aqmPUH7r_l76oPg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-120?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15703238162.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.18198999999999898591,  39.95573999999999870170]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: tMj79H5v1nOWmg9tsMfWiQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-52?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152224838.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-74.97256457805630702751,  40.08579008281230215971]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Z2Dh3nBT7bGIS2IVoV2zAw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-26?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156327512.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.11444000000000187356,  40.01142000000000109594]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 0JrHC4YM-Y-bUDzoLohH7Q<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-79?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152883474.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.22616999999999620741,  39.97733000000000203045]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: S-DbBDVLNtd6bQjIBOXfPQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-130?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158775200.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16947937011720171085,  39.93858337402340197286]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: JdiS_2HdAMtBprXgX0zkqg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-39?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157350158.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.06823495030400295036,  40.06788969039919834358]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 7HznGpvXxOP3ILOvBxG8hg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-90?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157457040.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.08342094719409942627,  40.06212696433070163948]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: hXL6oSqDFIp8DWQzR35QKQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-29?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157227712.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.20887756347660513256,  40.02664947509769888256]
+    },
+    properties: {
+      description: 'Dunkin Dounts<br>yelp_id: abyhAtKhZUh8w0VT3Rn_BA<br><a href=\'https://www.yelp.com/biz/dunkin-dounts-philadelphia?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154820535.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.13027200000000505042,  40.01493500000000125283]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 68KD674p59qJj4DX6NuTzQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-145?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153290503.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19384900000000016007,  39.95314489999999807424]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: xGBHv5kA1Cm4eYyqzxy7Kw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-40?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152227955.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.20117187500000000000,  39.94982910156250000000]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts & Baskin Robbins<br>yelp_id: uKEZQ_j3B8kMd-ThoGZDYQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-and-baskin-robbins-philadelphia?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157243100.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.01412200000000041200,  40.05703350000000284581]
+    },
+    properties: {
+      description: 'Food Mart Gas Station / Dunkin Donuts<br>yelp_id: gSoXByAMiIECV9zJTGp3zA<br><a href=\'https://www.yelp.com/biz/food-mart-gas-station-dunkin-donuts-philadelphia?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.24533080000000495602,  39.92369839999999925340]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 9YxqrKuDxwbMqcbKmTQFtQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157298238.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.00715549999999609554,  40.06896480000000337895]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: iSb0JdqiXqJWj_n9qo85TQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-72?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156772335.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14416503906250000000,  39.93294525146480111744]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: tmYDjisEHdbgngUwL_KuyA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-115?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159649447.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19796752929690342171,  39.93874740600590200756]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: MUQDp-1rzSN3lCjUycNLug<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-22?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153891278.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.18239590000000305281,  39.95483779999999995880]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: tchZNi_GAP6-CCCd3-h7Vg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-8?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152223292.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15786916984889387550,  39.95369612593840003001]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: lra3ButUZm7ZymM1YSnkWA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-168?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156254546.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.05657308620490653084,  40.04588464095340327731]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: woNKqqAki96qvJX3JONQfw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-114?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157080585.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.23207999999999628926,  39.99806999999999845841]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: ZVkrLNK2Z6zSeCn4U9A7rg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-42?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155785100.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.25756069999999908759,  39.91852949999999822239]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: _Yi8K3TrQKWSr2wLOc789Q<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-127?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157298238.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.12162019999999529318,  40.02616119999999710899]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: gr5sc_ycDGumpuwdfejg6g<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-13?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154578300.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15625331550839405281,  39.95126238664290241331]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: AnjX7gJg6Ndwsfv_ZtRclw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-163?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156253511.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15900421142579546085,  39.97861862182620029671]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 4pyR9gY74U0cRWZDB9C6Cw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-84?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157650703.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15215299999999842839,  39.97089799999999826241]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: WfjsGrbSIswLMwGtKVNcwQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-106?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157694700.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15920664550779406454,  39.94866806968190076077]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Yk62SB_HISNsv85CDbVkKg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-57?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159226447.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.24545386433599958309,  39.96919646859169716890]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: v2k2b8x6XccjWzwLtQp19A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-38?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155285011.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.23013000000000261025,  40.04431999999999902684]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: NxFuPjGPqM0X1RK4kOzdtg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-92?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155083810.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.07721565663810281421,  40.02310886979100246208]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: fwsPPYt0By1ivuXSXv3wlg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-138?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155352364.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-74.99434661865230111744,  40.08134841918950286299]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: MQO-zq4pTzVRYevnhTi44A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152811033.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.03088379999999801839,  40.10269170000000116261]
+    },
+    properties: {
+      description: 'Dunkin Donuts<br>yelp_id: Em5rXI3amBD5Ekvmy0qZUA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-158?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154642671.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.20629780000000152995,  39.94836130000000196105]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 5YFVP_hmIXyVDU24sTKDxA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-141?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153873300.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.03191375732420453915,  40.09310531616210226957]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: UrWsPqcJFlf5sGVRZzsuYw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-105?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156760700.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16325580000000172731,  39.96258569999999821221]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Ops2BTk03uTYdGRqB9haGg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-58?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155577927.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16589393059520318729,  39.94015121673359658416]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 0vU_OcoHU_hcEfNTpDyOvA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-76?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155459677.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.10225677490230111744,  40.04401016235350141415]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: EcTezFYlCzXlBBckEIyWFw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-94?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157287420.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.00167392194269666561,  40.10507516562940111271]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: SmoEzF8pka2rCG_HgE21zw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-11?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154642477.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15858985483650656079,  39.95182581245899910982]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: v30UfHgDVZJSjLriIwnh3w<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-44?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153519370.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17794999999999561169,  39.91799999999999926104]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: TEMI8cox1nHyZu3NAnC0dg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-35?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152718338.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.12560220000000299478,  39.97201830000000200016]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 29mQNZv8dsN8IAJ8uBnjUw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156342200.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.18612675368790121411,  39.92244623601440167704]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: UMdy-hcoLE5-zLgCrURvXQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-139?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153895331.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.02857969999999454558,  40.05617900000000020100]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: XHUdKqKQOzXUkImZvMbiBA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-107?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.10455170000000180153,  40.03127229999999769916]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: UzLJb3iAMH1xFzYEC6_Ugw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-83?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157434396.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.09857180000000198561,  39.99217989999999645079]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: M5cX4IYSKpqcr9U7U2zuJA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-18?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155331900.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.21676635742190342171,  40.03559875488279828915]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: CPdzdO7YuxFSUOWYhqthOA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-17?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154839750.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.03571999999999775355,  40.02955999999999647798]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: jgi-7LWLzcGkPvqFryqI6A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-132?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153324090.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15353580000000022210,  39.91438310000000200262]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: DrazQLX4I8aSEHAkkJEnxQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-23?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155517910.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.23922729492190342171,  39.90500259399409799244]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Zo4JTq141zH5ggZqX7A7bA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-102?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153654291.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15883770000000652090,  39.95036180000000314294]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 2lcgp7-09VXUTnlQ4PPKpw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-80?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155639196.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17473602294920453915,  40.03614044189450282829]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: YyiKn5EBUKwxlNHhK2v7Sg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-21?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154382880.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.08529000000000053205,  40.07757999999999753982]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: xM-HnG-yurTNI38ui0Akzw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-28?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157221190.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15950775146480111744,  39.96938323974610085543]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: IKOtPpMJTtvEkDXMSc_wjQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-98?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157870667.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.01012760000000412219,  40.05081810000000075433]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Z4vlztrocJo9WWcL5TFeBA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-65?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153354528.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15215657651420144703,  39.95100773870940003007]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: IC4r-CreIIONpsXIrvtGJg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-50?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156297000.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-74.97604859999999860065,  40.09616189999999846805]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: bWJZiwXPWgtlmDDyt-YCEw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-95?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156324919.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16718779999999355823,  39.95351240000000103691]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: eKxKm6fK0-tO_WM4D2_5xg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-117?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152418789.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.20832672715189914925,  39.95797678828240151461]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: e85sw6dE3jNu697Hb3BskQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-149?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152227800.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16589360000000397122,  39.94858930000000185601]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: UCmTG_e7I2a5dY_3qI6Jbg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-151?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155452137.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.08772253990170497673,  40.04496965776299788331]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: J3LqCD00kcwv-h0PUjiMoA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-125?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152883474.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.05152893066410513256,  40.06626892089840197286]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: nWRaSG-NXiJJzij950gZ0A<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-85?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159254433.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16326141357420453915,  39.94900131225590200756]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: C7UNcd4OuXxOZUU36tBalQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-48?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16913599999999462398,  39.92477800000000343061]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: vnQgWhtfE2dkqooJEo39rw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-108?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155511283.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.11954627931119432560,  40.04429027438160204611]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: rS2z1SZHNFHIU0_KWcUgsw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-124?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159244808.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.08539505302910299633,  40.03365464508529925070]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: DOm8TPqA0BKMwZZjWTIySQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-96?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152884707.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14384569999999996526,  40.03901619999999894617]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: DDFnIMsUjCHVOE72y86TfQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-59?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159242184.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16615295410160513256,  39.95217132568360085543]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: zMX3zX7Wm5pWA9n-FVOsrw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-philadelphia-54?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155644166.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.08903682231900234001,  39.99099250256860216268]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: KOXS3nJm-e5E5MwQ6Pfrlg<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-54?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153059050.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15406150318609945771,  39.94797101645109904666]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: OeO23GTZxF5tRnOXsYxCNA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-59?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156272945.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16734024473569775182,  39.94955506265760192264]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: OTBWyXkNsBYHqIlXJXnEDA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-25?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157320708.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16236910000000648324,  39.95298059999999651382]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: KeUC4uTrOs0S_7_tvrBxWQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-34?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16921707292389953636,  39.95457552737740059001]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: C9C-JQOdb5iywv7MzBiUVw<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-61?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156651237.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16062399999999854572,  39.94901899999999983493]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: yjXSQDwuI49poc3MA7AGdw<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-16?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159253617.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16648859999999388037,  39.94787219999999905440]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: p5pQ5PKXiEc4yLxsL4TsFA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155456519.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16674519494600303915,  39.95245042349900188583]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Ag_GeZwOrT0nmyhnKQiVBA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-48?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155613496.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.21256327629089355469,  40.00711383400889786799]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: FwvK-Xyi11yDeYmqmL6uSw<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-58?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154771475.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-74.96095245832310638434,  40.08746486647120121916]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: YklJC4Lt2rMGfV8JfrTtuw<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-67?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157561906.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16699219999999570518,  39.95457840000000260261]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: SnSptPAAcv4x5-dQl69Qhw<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-56?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157650379.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19146000000000640284,  39.95708100000000229102]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -FSNRWP_3twzsH-qliHcZQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-68?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12677460742.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14901700000000062118,  39.94174499999999738975]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: a-dPw0ISYHoxMmWgd4mK-g<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-11?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156274060.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15738000000000340606,  39.94250999999999862666]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ExfSwwCB1zQ6ZGd_UQ4wYQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159232389.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17018901385699791717,  39.95338547739999768282]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -Mf02OMdcMzHY-G-PGJ3yA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-14?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155694223.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16960000000000263753,  39.92275990000000263080]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: UrYj-HI2I61BK_nsPEa_QQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-21?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154680535.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19960733233250493868,  39.95231706732229781665]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: AXRSeJZfr9pi1wJQ61D4UQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-29?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12158985265.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17140960693359375000,  39.96097946166990055872]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ItgkjSjo5rXmnBH3Vww_Xg<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-13?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155578060.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17173767089839486744,  39.95205307006840200756]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: AEgaEEWNGuXWBHUkf_fN3A<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-22?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155610128.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.22278802930090080281,  40.00282957987789700383]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: b66R96v0N-Mmu0jb4cVhiQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-66?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12673553863.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16454502940179338566,  39.94911469680020132955]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: w5fyVRnGWXl_ldGt0Hu5uQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-12?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12157723148.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.20032905042170057186,  39.95404842281750035227]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 2cfEAFZZee8fq3Xx6yZ87w<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-70?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12678873825.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15735953227699894796,  39.95032705957699903365]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 7Klk8UuK1sdJt5_44eUtDg<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159255125.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.20680658387989581115,  39.94682381153040040545]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Vj1fFI5-CjEEQM1z3UQPqQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-53?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16522220000000231721,  39.95254899999999764759]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 17tedaqBcSiiOZJ6jUyKrQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-47?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153871963.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16458000000000083674,  39.94565990000000255122]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 48hwr-F1xEFfHdTD1ueE2A<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-65?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155462810.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.24285066917990150159,  39.87596553489510142754]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: HxdaEwpoXKll0Ze4nhS0XA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-44?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19352598558529621187,  39.94770302179770027351]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DTyeAYLV9YCc4mG5XTorTA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-64?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12677888233.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17244719999999347237,  39.95309069999999707079]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: k4WBufHPsiz4HgmT_gwK3g<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-43?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155642840.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15307188034060459358,  39.97945496980629798145]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 6i2h2hYPEEG13A6mamsq9g<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-15?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.00798034667970171085,  40.06924819946289773043]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 9c1p8TTOG_F55i3yEiVVDQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-26?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12156734703.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19230866550999792253,  39.95303774604300173223]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: lgSO-bzx0USaPe34zdLyCw<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153871914.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16684664354579581413,  39.95362742298920011308]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Af7NWqfoTszSyyuMRU6few<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-24?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155646455.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16180900000000519867,  39.95064200000000198543]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PTn0hZz7BiP5T2muyoxrjQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-19?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159810254.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16729739999999537758,  39.95729060000000032460]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Yu_ne9nY8dqhEewg9CbnGg<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-27?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15261717121650519857,  40.00428446180949748623]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gJLJgXz_1pjnDuHfuni1jA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-72?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.23411559999999553838,  39.99583439999999967540]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: n8KfQqY4U2j8iZ4cjq8dPQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-46?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 16106603456.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.21275348921889758458,  40.00672204527670317020]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DzAiKgi0HH1wDzAt4aEd7g<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-30?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.18859249999999860847,  39.95537079999999718893]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -ilTnXu41RrxQITuolQhmQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-8?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15460974750020284318,  40.03768360029010153767]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: o2iAIWfE78svgkgTjk58RQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-60?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159511388.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.14514092276100143408,  39.95212848802000138448]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: mBcvp7NarEQEviJyRiX23Q<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-50?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159223890.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.20659639999999512838,  40.07651140000000111741]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 90LsqLbaoQpz_xNbSQsCFA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-41?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152423860.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.21381084841000586039,  40.03209540218149697921]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: f22prjTaNUWwqvVsI4HWxQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-9?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154870830.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16087994889919343677,  39.95217812574369986578]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 29ThPh6IA69V-SfcwfV9Dg<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-49?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12159251580.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.01544952392579546085,  40.09555053710940342171]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: wVgo5MaohDWNuudZWWwfJg<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-20?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155529737.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17521906947860088621,  39.94495950547519669271]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: aTOCTSi1GwigOEcqOKRwFg<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-71?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12677851276.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17131809999999347838,  39.94794079999999780739]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: EFci0tbSrb7wko6tpVDnbA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-18?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155694223.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.57418060000000537002,  40.23558810000000107721]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kkwYBs-BcMcJBeSD2qqVjA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-28?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.24339255348000676804,  39.87654800546089717272]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BQsZLy_nczk0NMkqdgHlxQ<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-45?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19237722224100650692,  39.95454497671499893841]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: s6nOfGZJpkZ3JplCO9lGiA<br><a href=\'https://www.yelp.com/biz/starbucks-philadelphia-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152224237.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.18198999999999898591,  39.95573999999999870170]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: dD8qp4Ro74EI4DqQl8FFCw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12152439897.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.24012804444319613140,  39.87808329430839648921]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: zYnYOzhlG9jPoX9ANecEUw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153656160.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.17413709776499786130,  39.95409204500799660309]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: m408YCnvuIywzZkJX3K9KQ<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155649705.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16691400000000555792,  39.95398140000000353211]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: XF7qNhRJktAfLoH5GP4tCw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-9?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155870786.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16978000000000292857,  39.95573000000000263299]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: vDVTecHXPkKp9OkVXX_boA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155641153.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.15726067843530699975,  39.94988824708779873163]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: -AanHawaDlzWHQjrqRRWig<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12154135802.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.19627279174029865771,  39.94805096140770217517]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: xJ3aziMabFEjF8X0kvPfLw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153826160.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16835000000000377440,  39.95425000000000181899]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: bG5alCzwoomtIEyOq7z4Ew<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-13?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18008255227.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.24181516532890157123,  39.87632853273859723231]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: 8AMXgvXIX3e7rtKuRBn7LA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-11?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12153656160.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-75.16818999999999562078,  39.95170000000000243290]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: Sn5UgGyH42UqCpDsPRDUKQ<br><a href=\'https://www.yelp.com/biz/au-bon-pain-philadelphia-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12155679005.0',
+      chain_name: "Au Bon Pain"
+    }
+  }],
+          },
+        })
+
+        map.addLayer({
+          id: 'points',
+          type: 'circle',
+          paint: {
+            'circle-blur': 0.1,
+            'circle-radius': {
+              base: 2,
+              stops: [[11, 5], [14, 8], [22, 180]],
+            },
+            'circle-color': {
+              property: 'chain_name',
+              default: '#FF7616',
+              type: 'categorical',
+              stops: [
+                  ["Dunkin' Donuts", "#fbb03b"],["Starbucks", "#223b53"],["Au Bon Pain", "#e55e5e"] 
+              ],
+            },
+            'circle-opacity': 0.7,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': 'black',
+            'circle-stroke-opacity': 0.5,
+          },
+          source: 'points',
+        })
+
+        // Add checkbox and label elements for each chain
+        var input1 = document.createElement('input');
+        input1.type = 'checkbox';
+        input1.id = 'input1';
+        input1.checked = true;
+        filterGroup.appendChild(input1);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input1');
+        label.textContent = "Dunkin' Donuts";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer. 
+        var input2 = document.createElement('input');
+        input2.type = 'checkbox';
+        input2.id = 'input2';
+        input2.checked = true;
+        filterGroup.appendChild(input2);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input2');
+        label.textContent = "Starbucks";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer.
+        var input3 = document.createElement('input');
+        input3.type = 'checkbox';
+        input3.id = 'input3';
+        input3.checked = true;
+        filterGroup.appendChild(input3);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input3');
+        label.textContent = "Au Bon Pain";
+        filterGroup.appendChild(label);
+
+        // When the checkbox changes, update the visibility of the layer.
+        //input1.addEventListener('change', function(e) {console.log("Alive")});
+        input1.addEventListener('change', function(e) {adjustFilters(map);});        
+        input2.addEventListener('change', function(e) {adjustFilters(map);});
+        input3.addEventListener('change', function(e) {adjustFilters(map);});
+
+
+
+        // input1.addEventListener('change', function(e) {
+        //     console.log("Alive!")
+        //     var filtCondition = '=='
+        //     if (!e['target']['checked']) {
+        //       filtCondition = '!='
+        //     }
+        //     var filter = [filtCondition, 'chain_name', "Dunkin' Donuts"]
+        //     map.setFilter('points', filter)
+        // });
+
+	      map.setCenter([-75.14562119999755, 39.989369240216625])
+        map.zoomTo(11)
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'points', function (e, i) {
+
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'points', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'points', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
+    map.on('load', onMapLoad)
+
+</script>

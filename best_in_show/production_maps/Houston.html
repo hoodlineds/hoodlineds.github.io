@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+    .filter-group {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        border-radius: 3px;
+        width: 120px;
+        color: #fff;
+    }
+
+    .filter-group input[type=checkbox]:first-child + label {
+        border-radius: 3px 3px 0 0;
+    }
+
+    .filter-group label:last-child {
+        border-radius: 0 0 3px 3px;
+        border: none;
+    }
+
+    .filter-group input[type=checkbox] {
+        display: none;
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        text-transform: capitalize;
+    }
+
+    .filter-group input[type=checkbox] + label:hover,
+    .filter-group input[type=checkbox]:checked + label {
+        background-color: #4ea0da;
+    }
+
+    .filter-group input[type=checkbox]:checked + label:before {
+        content: '✔';
+        margin-right: 5px;
+    }
+</style>
+
+<div id='map' style='width: 100%; height: 100%;'></div>
+<nav id='filter-group' class='filter-group'></nav>
+
+<script>
+
+    function adjustFilters(map) {
+        var input1 = document.getElementById('input1');
+        var input2 = document.getElementById('input2');
+        var input3 = document.getElementById('input3');
+
+        filt_list = ["any"]
+        
+        filt1 = ['==', 'chain_name', "Starbucks"]
+        if (input1.checked) {filt_list.push(filt1);}
+        
+        filt2 = ['==', 'chain_name', "Dunkin' Donuts"]
+        if (input2.checked) {filt_list.push(filt2);}
+        
+        filt3 = ['==', 'chain_name', "Amille's Coffee"]
+        if (input3.checked) {filt_list.push(filt3);}
+
+        map.setFilter("points", filt_list);
+    }
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q'
+
+    var filterGroup = document.getElementById('filter-group');
+    
+    map = new mapboxgl.Map({
+      container: document.getElementById("map"),
+      logoPosition: 'bottom-right',
+      style: 'mapbox://styles/dwasco/cj0n4fxjp003q2rnyu3r18dd1',
+    });
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+
+    onMapLoad = () => {
+        isMapLoaded = true
+        map.addSource('points', {
+          type: 'geojson',
+          cluster: false,
+          clusterMaxZoom: 16, // Max zoom to cluster points on
+          clusterRadius: 2.5, // Radius of each cluster when clustering points (defaults to 50)
+          data: {
+            type: 'FeatureCollection',
+            features: [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46059300000000291675,  29.74147299999999916054]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: vMpmBNBoYjxmiR9qrK_LXA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-44?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136217685.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.58755999999999630745,  29.73628509999999991464]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: tONo1sGcQ8ekrJLC6FZBqg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-48?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12815568382.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41282499999999799911,  29.92166999999999887905]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 4GvD2CJ53PzSfA92BMeZ6g<br><a href=\'https://www.yelp.com/biz/starbucks-houston-42?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12819310269.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.60668950000000165801,  29.92081639999999964630]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xLrRNkYg0c6G9fs8_tJCmw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-171?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12819492219.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.61631774902339486744,  29.91576766967769884786]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: t2YRSYHPJ4Ug-Yv3hdmPhQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-105?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12819556313.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.37689618517569556388,  29.74642346249209978737]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Z3poLYhYI8IwUmiyKQ48Ew<br><a href=\'https://www.yelp.com/biz/starbucks-houston-110?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17135282204.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.55626978345900113254,  29.90365029883519909504]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: vTkrZMU2bXZca92BciSbSA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-59?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814770701.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41071235621460289167,  29.78920583072559935545]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BtEAaqBBpBNuZvnWDIXmgA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-233?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138804496.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.44777600000000461478,  29.74123000000000160981]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 849fDaF8YGLzdbcIYoQ1Fg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-53?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139611847.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36647251109150147386,  29.75547307657749840359]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: btfBlJnTo6GMgU0DI-6ypA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-103?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136510791.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36303709999999966840,  29.75526999999999944180]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3equwfJWM9nYloS2I9FeCw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-61?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137500668.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.49818999999999391548,  29.71649999999999991473]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Nx3A1maeQMM_u4DPzGm9Qw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-98?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132709687.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.55598999999999421107,  29.90350000000000108002]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: qxK8cSTKvkwIQ5jTAyiUsA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-216?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814696120.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.45910470187659768726,  29.67163212597370147705]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: mQP_JznC4BcHtnp-b-2R_w<br><a href=\'https://www.yelp.com/biz/starbucks-houston-19?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137210011.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.34416106061209461586,  29.72366709133870088522]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: F5xMN1idCuNNBdCfhX5bJg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-210?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137435624.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.27778435498480291699,  29.65251201215960108470]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: QX2PiLSeC97AjJaNVKIj6Q<br><a href=\'https://www.yelp.com/biz/starbucks-houston-200?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.55041628936430697649,  29.76651018177300045409]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: UZ5HQCSmljlWMlmXvey6RA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-89?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136479824.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46251999999999782176,  29.74203999999999936676]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: IuVdUTwJgk_T7WdyBIaZjA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-166?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136298919.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.56773886084559421761,  29.97922985688299846174]
+    },
+    properties: {
+      description: 'Starbuck\'s<br>yelp_id: Y91tcmVyZx3hxhZT79nBeA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-231?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12818945262.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.55811860000000024229,  29.71598789999999823408]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 6MNO2MdqanC8mgFm53alCQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-203?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18325579721.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.39844989776609907040,  29.77476130753660044093]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: x7L7qE98y7TJtcesNagsWw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-96?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36560821533200282829,  29.76012420654300072442]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: dZo28ZZqr1tazmt_3C4SyA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-46?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132252318.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.54722130298610238697,  29.95927552858359987908]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: FOO-lSsf2ghd6r34qBYOFA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-156?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18322377586.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.47531127929690342171,  29.74440739909499953342]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: XpVDb2qubsWGKJXbLKV5Tw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-92?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139611500.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.12623236608739318854,  29.55163975238259865819]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xVCyDEqskVGUZwdYKsi25w<br><a href=\'https://www.yelp.com/biz/starbucks-houston-152?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814889800.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46134000000000696673,  29.74061999999999983402]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: pCIN3_CA188pFFk2dJXdcw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-100?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139617533.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36303999999999803094,  29.75526999999999944180]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: uBhC9GY11HVXEE3iXn709Q<br><a href=\'https://www.yelp.com/biz/starbucks-houston-187?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136549113.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.64278864630320242668,  29.67852638800179931877]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: g4ohwdIzpa9byX35fZzyOw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-24?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12815307446.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.56771666425929367961,  29.97921036651980131182]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ixyWGwwW_ywaCoLn7g14wg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-178?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46389181942629420519,  29.73986564617149852552]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kpwXmf_PYoFAHvsb9-iIKQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-106?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136227575.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.64543489999999792417,  29.87640950000000117370]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: irEKMqRy-klcZD7E9I2xbw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-153?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12813451260.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.09815979003910513256,  29.54799842834470169350]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PQnsBC5Gl2DuZdhraO1OKQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-150?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12813350885.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.35780200000000661475,  29.75210200000000071441]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: K5BGaaQLCaoNbh_EOQP11A<br><a href=\'https://www.yelp.com/biz/starbucks-houston-39?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138538172.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.50657510757450552319,  29.78365053012770147234]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BXud2JcI93364zym_NROzg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-183?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12813873115.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36029533656549972420,  29.75140455252470061964]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xYQFh5ytxNXrH4jkMsrk2A<br><a href=\'https://www.yelp.com/biz/starbucks-houston-226?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17135772825.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.53650600000000281398,  29.78345399999999898455]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xGnzz5NwT7b_Homjmnjamg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-196?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12812459158.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.21339356899260053524,  29.60215955972670087704]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: dhMl4o8bJ8VVbyfKwE0HTQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-123?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17209074865.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.70539569967100135273,  29.78422956601890092543]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Lh6inxcC0AHsVrlEpbWfqQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-112?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.56284332275390625000,  29.72666931152339842015]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gRJ-2-UstxylCg30nLNdPg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-60?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137899929.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.33946606644579446765,  29.72080602512869873522]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: okuDjcgDPW1qmSeGm49qkA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-91?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137431197.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46808809041979770882,  29.72340747714040176675]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 8SgIUwOd7en--rg7EHMBlQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-201?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18325232867.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.62515437338569768144,  29.75589045110190156151]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: G8GhPElCPbBSJAXaggnSBQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-131?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12815968895.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.33548591464580113097,  29.98534557675129974541]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: S50jdRECif5VO8lkX31iTg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-88?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12812333339.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.47581250000000352429,  29.73169490000000081409]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DhXNpSqtFjjC_WfDnDkzIQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-102?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18322527441.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.26556946311100659841,  29.59951260270079842485]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: D-GTrSuIWPqT_ZrtGNgQbw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-215?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17133438300.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.43155000000000143245,  29.73291000000000039449]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kf5JwqiDt6m4-nhRdpDIEQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-175?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138502340.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.34984692454760590863,  29.98784494346460149927]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 1HL0SmuRTk8VHQREd_GlNw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-109?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.56188000000000215550,  29.73891000000000062187]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _-IuAqIfGxpA3aUq-I2lHw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-161?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18322420154.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.42647999999999797183,  29.67983999999999866759]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: O6LUxbm4DWa5zHzGe6Gphg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-27?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.56208142156529561362,  29.77351845332119850696]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: diKUjeGqZOQX8-ttq6vOuQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-17?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17134613918.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36885833740230111744,  29.75764846801759944128]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Q1s4P_AhJqtzxsWzzYX3Rg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-65?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136503319.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.55043439900779844720,  29.73650425134070118816]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ZSt8wxrIDwyU5pw5rwDglg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-33?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17135327666.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.48497192561630697583,  29.79796282947059893331]
+    },
+    properties: {
+      description: 'Starbuck\'s<br>yelp_id: 1fLhGtgTL2SHnZPXnluoAw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-193?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137229800.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.45791625976559657829,  29.68254661560060014835]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: pJMH7bq08OPL6vYZ1wRUxw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-222?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.33679625414640668168,  29.98045618637170051102]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: LIXUTkL-iPuVPG9Oi140CA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-227?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12817825308.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.43035888671880684342,  29.82855224609379973799]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: B8OEjVwzIxlIq3sSA8ryKw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-31?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17134760251.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.16741491552359377692,  29.80721992619769977750]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 7C7C8Q7DTwXHGNFTA8_4Tw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-167?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17133300635.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.68552438169720630867,  29.91189591625510146855]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DMYUPQRgqA-octWxmwYquQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-185?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12817704049.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.34095358669900122095,  29.72023990499069867610]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: hTuOAaBLSwyZXInF9tf0EQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-234?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137439358.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.62662000000000261934,  29.73291000000000039449]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Q18dEPdQexZFZYY8bSZgSg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-195?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12818105251.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.56707299999999349893,  29.65159799999999989950]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ZpQJAq1uE_bYZlTUuFaSiA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-70?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12818791751.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.51363073566379569002,  29.97986993998109994664]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: WuFtijdTT4sgOrCm67crcw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-141?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12818930556.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46596527099609375000,  29.74922943115230111744]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: w1E38weDIPafopeSuCRaJw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-47?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139643150.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.33111236989499559513,  29.98726375401020050049]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: uEs3G5e3J4SaoMY7tXKpew<br><a href=\'https://www.yelp.com/biz/starbucks-houston-86?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.39068000000000324690,  29.74199000000000125965]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BAT-niAuuZ2ZNejuoc7U2Q<br><a href=\'https://www.yelp.com/biz/starbucks-houston-37?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17135217278.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.49506759999999871980,  29.78510350000000173054]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: sVQdMhvjvrXj7fKj3qKkAQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-81?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138271350.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.42723800000000267119,  29.72803599999999946135]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: G9BL0V5o-hEt_KwR3ZirfQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-68?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136648044.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.34275817871089486744,  29.98595237731930041036]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3n8iNUvmXkrazAkV2v5Z5A<br><a href=\'https://www.yelp.com/biz/starbucks-houston-176?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12816840313.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.38972473144529828915,  29.77384948730470171085]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: V22FgYcnvdx6UpXGjC4UEw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-107?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18327082286.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41821000000000196906,  29.72038999999999830948]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: WgsbBFa6OvHtCqEwZqse6A<br><a href=\'https://www.yelp.com/biz/starbucks-houston-36?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17135224898.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.54613919999999893662,  29.96241489999999885185]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: d6Ib8r6UupxYoEooRg0DIw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-128?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12819705129.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.60684999999999433840,  29.76993510000000142668]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gdqqypSCUdeVLGtcZ6zarg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-129?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814961598.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.50009589651179453540,  29.74961647300959910467]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 1HqC55nHozJx8M1m_H5oSQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-26?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139757667.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36719320000000266191,  29.75918049999999936972]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: UHZ7M6QYZNQmycgCiwXTBQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-66?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132245800.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41036219999999445918,  29.74049000000000120281]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: qiwxzzPzlanC0uYfEcwAbw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-34?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17135238533.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41088208233010448112,  29.77655488385950022234]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: RRaQ15u196OL4LH50jdX5Q<br><a href=\'https://www.yelp.com/biz/starbucks-houston-35?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138624394.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.62890219999999885658,  29.93031759999999863453]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -V2DcmYKB5aHPIJmYguXlQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-223?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.38007000000000346063,  29.77374000000000009436]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Ojd6Qp8n0QOB6zOaXVN75w<br><a href=\'https://www.yelp.com/biz/starbucks-houston-173?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17133310376.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46203577585869481936,  29.68886777877930072123]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: QJLxCQccInBKynxPXt329w<br><a href=\'https://www.yelp.com/biz/starbucks-houston-38?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136623207.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41737032847420607595,  29.76104973451910140625]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 6Js61Pn2rVl9kpHAOtFslg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-55?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138617654.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46808199999999544616,  29.81984999999999885745]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: iuj4Dkj6H1BQT56CkWj_pg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-164?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136836376.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.44281966984270582088,  30.01673117955199998619]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: rzukv9b617WYXJgZFmfJ8A<br><a href=\'https://www.yelp.com/biz/starbucks-houston-15?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12818668312.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.37465845855500390371,  29.74874665739719858948]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: W01i8mYRtCJ9SIinZsrjtA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-82?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17133311042.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.57290616434859487072,  29.99641176756729876729]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: RSCpZN8x2J7HAnXeUFJ8kA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-126?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18327177627.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.71839140000000156761,  29.77482029999999824099]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: thKaNQOM4lnhaUziNpCK9w<br><a href=\'https://www.yelp.com/biz/starbucks-houston-114?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12813981020.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.52676689387999431347,  29.73670732764900037637]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: KmOO9PlrBZgidiSeI_Oc9g<br><a href=\'https://www.yelp.com/biz/starbucks-houston-138?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132665257.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.20131489999999985230,  29.93070379999999985898]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 6b_pwAeGejDQKy0obBedAg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-146?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814584583.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.44062999999999874490,  29.70554999999999878924]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 01WDw2ENY5Miim3vJwgioA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-52?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138390169.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.39731999999999345619,  29.71511999999999886768]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: le9f_ya_7v8fUprwXBAONw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-71?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137970720.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.33530453697950690639,  29.98522764274769869530]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: zf3hXRHWtNlUQNcPymg3nA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-182?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.58474999999999965894,  29.89145999999999858687]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: SKJLgiUimvg9y3rJDB9FAg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-104?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138499275.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.49851305782790689136,  29.98775660991670122257]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: FcmQQvkXGRa-U_y-DhhRIg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-154?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12815878399.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.40581500000000403361,  29.81228199999999972647]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: CnK7mVrifkrir62-Y3w6ng<br><a href=\'https://www.yelp.com/biz/starbucks-houston-43?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17138646710.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.39007704704999923706,  29.77353991261369969834]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: CPQFYTdqlKFSlVJ35oL9kw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-134?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.48247340000000349391,  29.76040769999999824336]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: C1gg4IPBAnETsh81bCP7Fg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-159?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137063261.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.39036559999999553838,  29.77405359999999845400]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: uMt5aO6ZhtPkWj-SnajPgg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-108?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.68444458839120159155,  29.83178963161559948958]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 7y5J1qgdN5nlH_aIeC1rNA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-169?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.59492640197279911263,  29.92756464836169882915]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: r06oAx835pEHW32gjl-jAg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-115?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.13947000000000286946,  29.59137000000000128352]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 7mnh69kYmIDii8PXdrylHA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-174?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12812803100.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46250999999999464762,  29.68918000000000034788]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: nH3_afevNa6pmcz3-KFtkw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-172?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132920030.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.54568167273859558009,  29.82107286116389843755]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 9iTO8eq-QuuAYKEjNGKebg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-95?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17134620493.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.40113630000000455311,  29.70969420000000127402]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: cq3Gl3lMjaCdH4xdZ4FSLw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-40?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17133838215.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.37471008300779828915,  29.75036811828610083808]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: JVTPWNyvDB9x8NKhr29h0Q<br><a href=\'https://www.yelp.com/biz/starbucks-houston-30?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136542180.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.39837010204790601620,  29.77473016899109836686]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: FwY9GZtt5l6sAhYtAa40Jw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-221?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18326181149.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.40097799999999494958,  29.71018199999999964689]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 9IxUTTvQ0kvqZcm9n_ZclQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-75?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137960080.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.54368355062599960092,  29.96418232479650001210]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: qS6AgtA_laZYrT77AzsQfQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-155?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12818979912.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.45486999999999966349,  29.74731999999999842998]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Qim79ZIsi-04gLlr7kzD5A<br><a href=\'https://www.yelp.com/biz/starbucks-houston-54?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139600021.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.64334999999999809006,  29.77513000000000076284]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: r_9Yl400PS4xqLKREU4IAg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-163?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814961468.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.40991558345149314846,  29.75286330370959930747]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: RSY68dFeT6Zg7GgCX0Fzhg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-29?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139427030.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.19720900000000085583,  29.92549800000000104205]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: CwiPBJfb--VysC1Ww61ZzQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-207?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814591679.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.50659432918490665543,  29.78377830529500158718]
+    },
+    properties: {
+      description: 'Starbuck<br>yelp_id: vKgyF8YWnd1SvbJsduXWqQ<br><a href=\'https://www.yelp.com/biz/starbuck-houston?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12813873115.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.26170999999999366992,  29.66985999999999989996]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PyGZiZcnpmiZI7XW1If8Lg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-165?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139461399.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.58873653411869497631,  29.78384985710169985396]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kp6m0e66QQZM2InBI-fDmA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-83?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12815849063.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.40753499999999576175,  29.94668000000000063210]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3P9F0Pendd2KKrEoxDeZPw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-149?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12818752222.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.45731570381950348292,  29.75431107814209852336]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 51a0CDeK0uyPWEIMc_NgUA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-45?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136223858.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.52176547826330477164,  29.78228587211560096648]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: A1fiy6uyVD_zLNa50IbReQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-63?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17133650800.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.56781010000000264881,  29.73547939999999911720]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: coz7L9M1Ig8cApJGQ1sXzg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-122?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137829950.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36402999999999963165,  29.76040499999999866532]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3J6L0BWIuwmAu_EYXfLXxA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-158?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132258515.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.64048300000000324417,  29.73529699999999920124]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: c-5gDmo1zNM6Juc6ilPInw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-25?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814970085.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41099007781720331423,  29.81491501520309839179]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 8nbv-idnEkc_9ouRkoEa3A<br><a href=\'https://www.yelp.com/biz/starbucks-houston-199?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12813656722.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.60527145398269510679,  29.73579967774870169706]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 5_UjzEqwwBXmuQuE1xhf6w<br><a href=\'https://www.yelp.com/biz/starbucks-houston-225?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.43805978741400508625,  29.72952735590320116899]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: NkKOVdVSMgfG6dgHIGQs-A<br><a href=\'https://www.yelp.com/biz/starbucks-houston-76?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136236570.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.48369787633420457951,  29.83266078664729903380]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xmHeFkj2uaRV0ppHrbJ54Q<br><a href=\'https://www.yelp.com/biz/starbucks-houston-57?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17134760081.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.50382047891619663460,  29.73724398221190057257]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: dFV_MWJeZiQ3p75yY74rAg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-191?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132666474.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.45311739999999645079,  29.74521060000000005630]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: VN8q0NBltSVAZNWhOHJ8Ng<br><a href=\'https://www.yelp.com/biz/starbucks-houston-85?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139609608.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41031446838080398720,  29.75326188493729873130]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: XKPIa1UqA-pn41shWKrj0g<br><a href=\'https://www.yelp.com/biz/starbucks-houston-32?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17135223029.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.23418068885800380485,  29.63170378502150015265]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: YNIpQCTMU5guvk6I-p8nJg<br><a href=\'https://www.yelp.com/biz/starbucks-houston-90?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139470716.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.42490452527999877930,  29.70501436111020154840]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xbzN3UfOfnKTfi2QdnpDzQ<br><a href=\'https://www.yelp.com/biz/starbucks-houston-143?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.29785409999999501451,  29.69643990000000144391]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: zlHy83BiHkChmbHNWQSDqw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-157?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17134540832.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.53957008751430635130,  29.78102743340179969778]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 4v7HtjghE_pGMgnC1YST2g<br><a href=\'https://www.yelp.com/biz/starbucks-houston-117?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17133650498.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.34930183437100481569,  29.98511055928539903448]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Ezm85AaEKGOqKrM-nZ_WqA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-228?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18007827282.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.60434445443640072426,  29.89687105693669977313]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: r812ZqUgvW9GDcaS4l6QEA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-214?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814147545.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.64619000000000426098,  29.84523000000000081400]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: tTKc7y0vZrLmru3sVNVvkA<br><a href=\'https://www.yelp.com/biz/starbucks-houston-162?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12813451591.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.35955049097539415470,  29.76360239088539927366]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: KTuNPFilK7apPyNeBBpmpw<br><a href=\'https://www.yelp.com/biz/starbucks-houston-80?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18322505474.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.21430209999999760839,  29.58371929999999849770]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: ZkPOBfiHibbmtxBqNYFYDQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-11?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18325231226.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36579640641019750547,  29.75660848246020151464]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: YbFJcQrGj3TXViUvcw5VkQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-16?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15085839459.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.64553353624890519313,  29.85745878711299994279]
+    },
+    properties: {
+      description: 'Dunkin Donuts & Baskin Robbins<br>yelp_id: pOAGGzVEgfd-qnEwu1RCCQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-and-baskin-robbins-houston?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18008595339.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.27498359279090323071,  29.65240857945380170690]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: PaQN_v-PsqjIQTSeiglXuQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136408601.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.64460800000000517684,  29.72872399999999970532]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: RcXFW-a1Ebn8QLVeS7rj_g<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-15?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12816177373.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.42051999999999623014,  29.76098999999999961119]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: VFO-ZZXAM-Zpp5ZDrnNVXg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-23?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18329627118.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.48913489560599998640,  29.83960947666150076429]
+    },
+    properties: {
+      description: 'Dunkin Donuts<br>yelp_id: ItV0D2x0gzx0LKTmTDmBQg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-24?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814143785.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.33435459999999750380,  29.98561750000000003524]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: SmRMXUhKLAkev0Lf7YEwRQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12126437083.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.56497854224649302068,  29.73639127385419911320]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: w82Qg_Ui3ktGRJhflkxxVA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132662000.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.44139862060549717171,  30.01780319213870029671]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: O0FRig5oygMc-LMek3gsvA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814447858.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.11455264597130110360,  29.56343738242820151640]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: WxbLX_cE6kIOGcLDAAVzDQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-20?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18322404477.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.64289999999999736247,  29.88760999999999867782]
+    },
+    properties: {
+      description: 'Dunkin Donuts<br>yelp_id: kKQrXFARzEcJAzPoPro6mQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-19?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12814630966.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.41089999999999804459,  29.74491000000000084924]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: 9SWhCptxscCL74YWBghjfA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18325304420.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.62741988549460359081,  29.73539046217669934435]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Vm2HWIfxXWZ0kcO8_mNksw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-houston-18?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.37128448486329546085,  29.75483997251090073632]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: R55zxdz54tSzxW1TbVwSzA<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136520107.0',
+      chain_name: "Amille's Coffee"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36938960000000520267,  29.76019270000000105370]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: -dXi7fGWDzXK4tfg_ClFBw<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-8?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137500661.0',
+      chain_name: "Amille's Coffee"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36747842987340106902,  29.75797719407999863961]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: t_TSuLuTkHVVayrqzMTQmg<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136503301.0',
+      chain_name: "Amille's Coffee"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36161119385680251526,  29.75547048427619856170]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: vR80nurDtphabLlMD2SPEw<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-9?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137390541.0',
+      chain_name: "Amille's Coffee"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.37274236126860671448,  29.75428756698709875650]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: dPub0huWRqtG-7bRboPrsg<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136550594.0',
+      chain_name: "Amille's Coffee"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36637067794799804688,  29.75891955856949877557]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: lVPt_iKMTr8WX89cJleJVA<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17132277426.0',
+      chain_name: "Amille's Coffee"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.36938960000000520267,  29.76019270000000105370]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: gYRoa6uDrtv4ysAcuvHitA<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17137500074.0',
+      chain_name: "Amille's Coffee"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.46104099999999448301,  29.73723529999999826146]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: 1jVxhfTHcdJUibwGfxaP4w<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17139638337.0',
+      chain_name: "Amille's Coffee"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-95.37339959999999905449,  29.75792879999999840379]
+    },
+    properties: {
+      description: 'Amille\'s Coffee<br>yelp_id: 5qDSjeRdla81wV45HNGbww<br><a href=\'https://www.yelp.com/biz/amilles-coffee-houston-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17136595282.0',
+      chain_name: "Amille's Coffee"
+    }
+  }],
+          },
+        })
+
+        map.addLayer({
+          id: 'points',
+          type: 'circle',
+          paint: {
+            'circle-blur': 0.1,
+            'circle-radius': {
+              base: 2,
+              stops: [[11, 5], [14, 8], [22, 180]],
+            },
+            'circle-color': {
+              property: 'chain_name',
+              default: '#FF7616',
+              type: 'categorical',
+              stops: [
+                  ["Starbucks", "#fbb03b"],["Dunkin' Donuts", "#223b53"],["Amille's Coffee", "#e55e5e"] 
+              ],
+            },
+            'circle-opacity': 0.7,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': 'black',
+            'circle-stroke-opacity': 0.5,
+          },
+          source: 'points',
+        })
+
+        // Add checkbox and label elements for each chain
+        var input1 = document.createElement('input');
+        input1.type = 'checkbox';
+        input1.id = 'input1';
+        input1.checked = true;
+        filterGroup.appendChild(input1);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input1');
+        label.textContent = "Starbucks";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer. 
+        var input2 = document.createElement('input');
+        input2.type = 'checkbox';
+        input2.id = 'input2';
+        input2.checked = true;
+        filterGroup.appendChild(input2);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input2');
+        label.textContent = "Dunkin' Donuts";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer.
+        var input3 = document.createElement('input');
+        input3.type = 'checkbox';
+        input3.id = 'input3';
+        input3.checked = true;
+        filterGroup.appendChild(input3);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input3');
+        label.textContent = "Amille's Coffee";
+        filterGroup.appendChild(label);
+
+        // When the checkbox changes, update the visibility of the layer.
+        //input1.addEventListener('change', function(e) {console.log("Alive")});
+        input1.addEventListener('change', function(e) {adjustFilters(map);});        
+        input2.addEventListener('change', function(e) {adjustFilters(map);});
+        input3.addEventListener('change', function(e) {adjustFilters(map);});
+
+
+
+        // input1.addEventListener('change', function(e) {
+        //     console.log("Alive!")
+        //     var filtCondition = '=='
+        //     if (!e['target']['checked']) {
+        //       filtCondition = '!='
+        //     }
+        //     var filter = [filtCondition, 'chain_name', "Starbucks"]
+        //     map.setFilter('points', filter)
+        // });
+
+	      map.setCenter([-95.44842346811372, 29.784364904792625])
+        map.zoomTo(11)
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'points', function (e, i) {
+
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'points', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'points', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
+    map.on('load', onMapLoad)
+
+</script>

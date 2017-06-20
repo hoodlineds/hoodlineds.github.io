@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+    .filter-group {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        border-radius: 3px;
+        width: 120px;
+        color: #fff;
+    }
+
+    .filter-group input[type=checkbox]:first-child + label {
+        border-radius: 3px 3px 0 0;
+    }
+
+    .filter-group label:last-child {
+        border-radius: 0 0 3px 3px;
+        border: none;
+    }
+
+    .filter-group input[type=checkbox] {
+        display: none;
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        text-transform: capitalize;
+    }
+
+    .filter-group input[type=checkbox] + label:hover,
+    .filter-group input[type=checkbox]:checked + label {
+        background-color: #4ea0da;
+    }
+
+    .filter-group input[type=checkbox]:checked + label:before {
+        content: '✔';
+        margin-right: 5px;
+    }
+</style>
+
+<div id='map' style='width: 100%; height: 100%;'></div>
+<nav id='filter-group' class='filter-group'></nav>
+
+<script>
+
+    function adjustFilters(map) {
+        var input1 = document.getElementById('input1');
+        var input2 = document.getElementById('input2');
+        var input3 = document.getElementById('input3');
+
+        filt_list = ["any"]
+        
+        filt1 = ['==', 'chain_name', "Starbucks"]
+        if (input1.checked) {filt_list.push(filt1);}
+        
+        filt2 = ['==', 'chain_name', "Dunkin' Donuts"]
+        if (input2.checked) {filt_list.push(filt2);}
+        
+        filt3 = ['==', 'chain_name', "Au Bon Pain"]
+        if (input3.checked) {filt_list.push(filt3);}
+
+        map.setFilter("points", filt_list);
+    }
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q'
+
+    var filterGroup = document.getElementById('filter-group');
+    
+    map = new mapboxgl.Map({
+      container: document.getElementById("map"),
+      logoPosition: 'bottom-right',
+      style: 'mapbox://styles/dwasco/cj0n4fxjp003q2rnyu3r18dd1',
+    });
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+
+    onMapLoad = () => {
+        isMapLoaded = true
+        map.addSource('points', {
+          type: 'geojson',
+          cluster: false,
+          clusterMaxZoom: 16, // Max zoom to cluster points on
+          clusterRadius: 2.5, // Radius of each cluster when clustering points (defaults to 50)
+          data: {
+            type: 'FeatureCollection',
+            features: [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02157592773440342171,  38.89450454711909799244]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _pES1ERhlvS9-RR5YF1drg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-66?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026285044.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02343000000000472482,  38.90357999999999805141]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PYyLhfRcTNojdyYoBCaqmg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-17?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022493544.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.08570299999999519969,  38.93354800000000182081]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: pCYIcZQNj89m8rf3NJgTcw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-110?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023635100.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01961509999999577758,  38.88681559999999848287]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: vVpUy8WOVD0aFaPpZvtpeQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-28?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024846432.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02340573072430629509,  38.90873305528929648744]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: k04ERGcvYrUIdK6YkJdxWw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-120?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026825895.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02661798490549927010,  38.90146835970860195175]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: L4smS5bP0uhFOoePayOmnw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-50?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022897451.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04420000000000356977,  38.89627000000000123237]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: t5OpRYVqXdPq4gF5a6vHaw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-33?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12029945150.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01189771294589547779,  38.90025101602080326302]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: lrCUj2RyS7PUfG5zKtYf3Q<br><a href=\'https://www.yelp.com/biz/starbucks-washington-100?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022897464.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01526589691640367619,  38.97479201691960071230]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: CxtEG8PJcVHJfQcTY78WnQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-165?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.96644801646469602474,  38.85910354701079683082]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: bJrkiLDyNmgsML4Q1JFXrw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-101?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025757525.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.05040811679070600348,  38.90108258378789685139]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: GCCQixiw3E3ze-0z_VCXVg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-140?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027154187.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00365494233800234269,  38.87627090600000201448]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: MZuAo32AkUZIf0QSrApRIA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-139?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024881101.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.08480072021480111744,  38.96049880981450286299]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: LPgPMO8JD0KIlib7PxSAIg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022446224.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.99738933144169550360,  38.90002711482480179939]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kydKYU-kYW1_I9KC9OFRMQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-164?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01167886186499345058,  38.89619844283409832997]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: rqdM5NxY-hLQTZhGhMDGag<br><a href=\'https://www.yelp.com/biz/starbucks-washington-137?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023470364.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04212564487450265460,  38.90148766947039860042]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: U2U2xFaAKxghxmiE0V1DAw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-108?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028610061.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.06752557614599652425,  38.91502830585900341021]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gfmex-WDQBdHdaZ5YiQRYg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-35?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022986822.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02768700000000023920,  38.89929599999999965121]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: HuK6Sv0jTso2WNRiCZMCUQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-59?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028721500.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04555308367000066028,  38.91278691989899840564]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 1na_z-FqSkrKQdKhySHbSA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022326765.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04835068403100706291,  38.90541879955600279573]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PEXp5vbXh-EkprnRFU_dxg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-42?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022932012.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02364349365230111744,  38.89862442016600141415]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _gQvLHV91kJ2LLL_oqDzlw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-78?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023936742.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03714999999999690772,  38.91675990000000240343]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: hVCKxTaHfy9TLXpD3rrC0w<br><a href=\'https://www.yelp.com/biz/starbucks-washington-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024831536.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00314331054690342171,  38.90781784057620029671]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BWVWdm3HzihcoyUngP8mgw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-160?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03294999999999959073,  38.90991999999999961801]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Ffb5JaApmnmU8Wyrr3i5Cw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-131?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024629717.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02904971163890479602,  38.90141938975779822840]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: zLRfasKQMLzeRxyKqOlkWg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-102?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022160085.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01784740942980533873,  38.84433734875690191757]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ACAu_pZhcywRuAjcXhvmlA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-57?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025626270.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.06189700000000186719,  38.90490700000000146019]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: nl4fKxQPA0IL2kb5JP4bJg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-114?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026256706.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03328000000000486125,  38.90433000000000163254]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: vo9shAPerg14YFZKyVka4Q<br><a href=\'https://www.yelp.com/biz/starbucks-washington-43?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024670821.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03422839518060527553,  38.90274987863929823106]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DNvyUBtptQg983El9KX_lQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-15?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12029620975.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02339999999999520242,  38.90167000000000285809]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: mYJx0PyfOHAocP0EFyL32Q<br><a href=\'https://www.yelp.com/biz/starbucks-washington-136?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026815173.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04839300000000434920,  38.90289299999999883539]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gQwOiIKuSvBHJ-BCmv-dnQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-130?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022932063.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.07307080489630379816,  38.93563782898429792567]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: UrIJWLXDH_-NbsS7nb3f5A<br><a href=\'https://www.yelp.com/biz/starbucks-washington-151?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022371941.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.07525814207539838208,  38.91035311953329767221]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 1ygepopNC4CKERpJuqvogg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-60?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026873198.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02176914207659308431,  38.91985542339570258719]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Nvp2TsZs7LarDZy8LYlkkQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-109?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12029863952.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03913000000000010914,  38.90290999999999854708]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: kTYqFhelOnFl-58V8WoF2w<br><a href=\'https://www.yelp.com/biz/starbucks-washington-135?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024528210.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.07171354941699803476,  38.92018038341699792682]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Emv95IbnE4TqHuXJyi_EHQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-72?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12029650720.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01964246675130709718,  38.88588833901410168892]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gdeYbyRxM575XSKcQ-ocXg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-95?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024848059.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04044340000000090640,  38.89870069999999913080]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: VRkpe9wa5P4ud75kWcB6EQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-53?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023931811.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.06691999999999609372,  38.91622999999999876763]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: brmFE1yOGZ-HKIVvB7QmAg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-47?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023333223.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03201719999999852462,  38.89605399999999946203]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: jIUKSNO7Wj-mTC-cN9EwRg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-75?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023932000.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01546531751159818668,  38.88482077844920326015]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: HgMAVDs_y7SaZb2l_9vU8A<br><a href=\'https://www.yelp.com/biz/starbucks-washington-16?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024796907.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02204129999999793199,  38.89994049999999958800]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: igpqyTkTj5EmfUMX1mDJaw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-96?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022891576.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00620999999999582997,  38.89750200000000290856]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 74rXT70x2QFtTemhWpaf6g<br><a href=\'https://www.yelp.com/biz/starbucks-washington-132?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026825895.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02451951801779728157,  38.88407394289969687406]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 502dOKF17S9CMLtPDDD_0A<br><a href=\'https://www.yelp.com/biz/starbucks-washington-56?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024792129.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.07949999999999590727,  38.94836000000000097998]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 4S3KWz3HLaQOBzj-IqMndQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-40?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022379480.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.98631286621089486744,  38.88348770141600141415]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: MDylzZ3PgGyZw6SDeRo_hg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-91?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025474333.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02958121822419457203,  38.88441792673599906038]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: yZwdxV12RGm9_sgiVhYHlA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-138?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024886366.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00225000000000363798,  38.88680000000000092086]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 65QQRzS8bUwS45ngwF1zAg<br><a href=\'https://www.yelp.com/biz/starbucks-washington?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025449783.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.99720851849190239591,  38.93255501747209734731]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: pRko3gjLpejl_Xdxo_3Fhg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-170?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025050472.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02757123806779304687,  38.89369422883339666441]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: oUQCz7Z7KHnugVtpg1q-dQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-167?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027709945.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04820200000000340879,  38.89921499999999809916]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: eFWHjPpX2Shjai-5kDwzKg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-9?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12029940200.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03246332357250025780,  38.92946225420499928305]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: LYsnLfoDxQHdCkKMpiMDKw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-11?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022322670.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.08679469999999867014,  38.93839229999999673737]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 8SDbxhaPETQIpfk4S3UNFg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-171?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028857497.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03309230237310600842,  38.90977094463050178774]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: NHyMu1RP610d6CSNS67Y-g<br><a href=\'https://www.yelp.com/biz/starbucks-washington-155?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024629717.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02906000000000119599,  38.91673000000000115506]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Jf0_69elld7l0dKOb-6R-A<br><a href=\'https://www.yelp.com/biz/starbucks-washington-134?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022327271.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02661999999999409283,  38.89668000000000347427]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 0Hp1xmrlx7GUyxLP7hkW_Q<br><a href=\'https://www.yelp.com/biz/starbucks-washington-49?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023475221.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02619930000000181280,  38.96881100000000230921]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: s90nld7TQ4eB4vvUbEJfFg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-143?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027235644.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03230000000000643468,  38.89981000000000221917]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ivWomDDluM1UL0eXInvzlA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-119?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026379555.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.05482939929750330066,  38.86989160523940256553]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: aKyyFNUaB6C3VMo0SV_D5w<br><a href=\'https://www.yelp.com/biz/starbucks-washington-146?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022718810.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.09577941894529828915,  38.94454956054690342171]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: rabLg2QIN7OOiKxIZO1pQA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-29?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026863680.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03330990000000610962,  38.89844510000000354921]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 2VBw0OXyD6bOmzJMAl1GtA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-104?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02912209999999504362,  38.90159260000000074342]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -Uc-uR7_KDRf3t8gy7crQA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-112?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022160085.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04290799999999705960,  38.92269100000000037198]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: GBizTlwuF1xKCcTJwy3AFQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-93?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025189649.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03686523437500000000,  38.90220260620120029671]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: nwn1NzZSZRyVh_K-l4Xcyg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-125?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028570852.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02677501315299934959,  38.89966762576899839132]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: nZC5R_BIOnRwdXSlxOroOw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-27?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028054814.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04684550000000342607,  38.90977490000000216241]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: co97IkwKizwQlIdPt0EczQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-113?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024528420.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.05589000000000510227,  38.92978990000000294458]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: j11--ppKhDc8H5Bv1ojj2g<br><a href=\'https://www.yelp.com/biz/starbucks-washington-145?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022655382.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03196324399159777840,  38.90295545163110091380]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: F79AcWwZEqxiFfMhQ2lbCw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-103?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026820111.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.95202491868060690194,  38.92097337353010289007]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 5W6gPk-hq21C5eWKi52kXw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-172?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.95202491868060690194,  38.92097337353010289007]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: gwm1BcOD_IqIK_6S4a-AAQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-173?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.06421000000000276486,  38.94449300000000135924]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 0FEZAn9bRqF9Tgk2cvsLlA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-18?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023642796.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01797895133499594067,  38.90368625521659851074]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 8x4m_1IOgDu_bpvilbSnFg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-31?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027192435.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04523530000000164364,  38.90411300000000238697]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: RaJDGbbWhz0WSN-91PY_pg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-121?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023314260.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04144660253899701274,  38.90034979917999891086]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: xSyJcom0VGQvUmn99k71XQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-97?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027852024.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03403470000000652362,  38.90276339999999777319]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: wZ9h0AfABz_vvZJGmujUmg<br><a href=\'https://www.yelp.com/biz/starbucks-washington-141?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12029620976.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04419710000000520722,  38.90095139999999673819]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: AP3Bf9rxlIHw2jbFQ15q6g<br><a href=\'https://www.yelp.com/biz/starbucks-washington-62?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027753935.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02185608446599474064,  38.89538414776330199629]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: e9lBVEWawFlDEDVhKqMT_Q<br><a href=\'https://www.yelp.com/biz/starbucks-washington-45?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026289421.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03212329999999496977,  38.89845230000000242399]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: TlAQBG4hBk9cokHVfr05QA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-30?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027833048.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.10277000000000668933,  38.92672999999999916554]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ckgPZOy3y4lItjg95LRtow<br><a href=\'https://www.yelp.com/biz/starbucks-washington-54?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022446071.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04366299999999512238,  38.91054150000000078080]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: h78zbN5P-iYWk2c-uvtOMQ<br><a href=\'https://www.yelp.com/biz/starbucks-washington-94?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025881280.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01773834228519888256,  38.91043472290039773043]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: sEGwZHZCtT9tfBUc-JEtVw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-89?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17034175203.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.06047499999999672582,  38.90214600000000189084]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 7sEgQiozmbFE6_n2hU6aPw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022986180.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01762221753600101692,  38.87738451361659741679]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: C9qIqr1bFAYn7sI8k1d33w<br><a href=\'https://www.yelp.com/biz/starbucks-washington-52?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025549155.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.05195989999999994780,  38.90478999999999842885]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: lfOoGfySnByUsQLQR7kK-Q<br><a href=\'https://www.yelp.com/biz/starbucks-washington-116?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027280312.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03306579589839486744,  38.90163040161129970329]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: fpIceLeztnJBTcp-pSL0ow<br><a href=\'https://www.yelp.com/biz/starbucks-washington-161?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028420624.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.07472989999999413158,  38.96313099999999707279]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: eH2A1ZZxyyxizWWJyEiEUw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-115?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022449705.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00615578087020196563,  38.90549872891210014814]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: GpzFIqCzRsBRWK33Zkju7w<br><a href=\'https://www.yelp.com/biz/starbucks-washington-68?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022895974.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03009897158729302191,  38.89721949405549850098]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: cGxuB12AXmvMTnxQLgx5CA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-163?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027377378.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04085944191049861729,  38.90365965792520341893]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DA2yuJeyRlhAQnoChpNc2g<br><a href=\'https://www.yelp.com/biz/starbucks-washington-79?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022939180.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02343260919859346814,  38.90193692056060115192]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: wHlh1VNFbl1ZgARX7aft9w<br><a href=\'https://www.yelp.com/biz/starbucks-washington-73?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026815173.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04184464676499999314,  38.90743110686400285658]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: eGgcLdIszUg4o7SkpdC76w<br><a href=\'https://www.yelp.com/biz/starbucks-washington-128?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027854728.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.97992800000000102045,  38.90073999999999898591]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Z5pAwnH8VW6jXEOLvfopqw<br><a href=\'https://www.yelp.com/biz/starbucks-washington-67?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023986903.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.99824929237369985913,  38.93542377888800132268]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Cw1k424hWzxy511IfJSn5A<br><a href=\'https://www.yelp.com/biz/starbucks-washington-147?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023196368.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.99511490000000435430,  38.88355539999999876954]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: bu1Lo7wNSAg-54zjdGEmzA<br><a href=\'https://www.yelp.com/biz/starbucks-washington-38?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025447913.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04053700000000048931,  38.89891080000000300743]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: zy8_G31NHgzSIDwcHLcpmQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-24?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023477428.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00416698245470570328,  38.88710346373179760349]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: OAVUwyREuLaoMXExpoHXPQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-38?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024792639.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.05567046740139858230,  38.86960485075859850213]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Ahy8bx8HlXqTeEWL62QteA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-26?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 17032714347.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03160859999999843239,  38.91717909999999847059]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: CaQ_3_AOD_tHMcfwHvFTaA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-14?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026294627.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00655609369279375187,  38.89770132824710202613]
+    },
+    properties: {
+      description: 'Dunkin Donuts<br>yelp_id: zAthn67_PTpV0i5AbMua9w<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-44?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04331510000000093896,  38.90393600000000162709]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: P3K2LulazXKDbQ9ftjlaJA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-43?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023311511.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.05187905579809637402,  38.92460695623940125643]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: gkJMF9ib0_lWU3oEo-JySA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-27?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024505580.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.93783253431320190430,  38.90765659511090035494]
+    },
+    properties: {
+      description: 'Benning Citgo & Dunkin Donut<br>yelp_id: UtB5380gQtYNgm7ZA_mv3w<br><a href=\'https://www.yelp.com/biz/benning-citgo-and-dunkin-donut-washington?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023881067.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.99449920654299717171,  38.88349914550779828915]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: yF3bdXSdoKe66F2fgVj_nA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025433923.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00416698245470570328,  38.88710346373179760349]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: fjDvpEn_ClNO6mJKOoRxug<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-45?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03270000000000550244,  38.92519000000000062300]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: ykCnbPb0KWW6zK3jAC4mSg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022340314.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04579999999999984084,  38.89641999999999910642]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Rg95r455J-KPFQWHlh_9ag<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-17?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.08074000000000580712,  38.94941000000000030923]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: Lt7lECpbGwsnt68hSsuuoA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-46?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028032527.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02902747547740602840,  38.89826752404849941058]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: -8udFfZd1l-NkhtpTilmqQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-30?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023477428.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.99295696677769740290,  38.87348940925019746828]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: qLAoa-mvRYhkdcwWhssgnA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-11?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028898800.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03991305083040685986,  38.90228502185060222018]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: f6aHopMCrwzh1uue0ywlJg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-21?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025303580.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03154000000000678483,  38.90403400000000289083]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: QiVUKptjqgBklpLAt5nvaQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-16?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027350378.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01809000000000082764,  38.91035000000000110276]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: ceTSWAZ1v0dI3ywixWW0gg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025638144.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02218860000000688615,  38.89787689917380220095]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: OqADmoocMQye_jzi01ykaw<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-8?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023936006.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.01710566480200270689,  38.91357576504199755618]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: scHCCJOmYIPsB4KiZXwMMA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-12?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023326444.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.05061000000000603904,  38.89791000000000309456]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: NfW4xfuj75gsg264XxD0Gg<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-35?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022429509.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00375352054830102588,  38.90718332649969823933]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: vJGOma3-4ndS4AzQwsiMAA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-40?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022891500.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.97113037109380684342,  38.91767883300779828915]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: TqNh9fmELYOhCRjMd9o8mQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-13?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12025263677.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.99543833732599296127,  38.92080099749730237590]
+    },
+    properties: {
+      description: 'Dunkin Donut<br>yelp_id: kikBv0smtuEBJsO3spXFJg<br><a href=\'https://www.yelp.com/biz/dunkin-donut-washington?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028470439.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02883579999999597021,  38.89847739999999731708]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: WSaEP-MsV3_Bu1OUv8UbIA<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-31?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02838900000000421642,  38.89817430000000086920]
+    },
+    properties: {
+      description: 'Dunkin\' Donuts<br>yelp_id: uP_WAazXdTqwOd4-aIpJzQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-23?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12023477428.0',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02467314378590401702,  38.93743294291449785760]
+    },
+    properties: {
+      description: 'Dunkin Donuts<br>yelp_id: fdqwSuX7mZtH5O0f0HqVFQ<br><a href=\'https://www.yelp.com/biz/dunkin-donuts-washington-42?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Dunkin' Donuts"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03019700000000113960,  38.89499699999999648981]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: Vjac2aDMbppsnVr31x6kzQ<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-23?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022897265.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03005000000000279670,  38.90420999999999907004]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: aLTn-OUHR0HKyXTh6jNBkA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-15?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022897809.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04579162597660513256,  38.90036010742190342171]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: dF3RLwITTckPqZ-1IycQwA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-12?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028879215.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04206085205079546085,  38.90410614013669743372]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: PH6jBGwQJkXXkCdlViQtwA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-37?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022968696.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04248809999999991760,  38.90226359999999772299]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: _mJKzMSubHPQlXtmaJ_xfA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-29?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028879721.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.10785679999999331358,  38.93587490000000173040]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: GdJv_lK039Mv3K2qQzIZSA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-36?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03003999999999962256,  38.89873990000000247846]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: WpT01iPXF4jCyUEPQ-2fPQ<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-13?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026390846.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00314331054690342171,  38.90781784057620029671]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: dcCVlBN9pyPOTqI-YJdWRQ<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-20?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028980619.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02028656005859375000,  38.89463043212889914457]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: pCMq2ExSrpFV_ePMJ6rZeQ<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-9?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026388060.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02941930000000070322,  38.89559859999999957836]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: AclaOlj_yyUtF0hz2yHvWw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-18?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027839601.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00722707385250487278,  38.89753842487709789566]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: 3SlLS2jCgLCZ3RHZ5t8d2g<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028980299.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02630615234380684342,  38.89546203613279828915]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: nUds1hlxV-8hgrMVhU_pIA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026381941.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04040746840080089441,  38.90358289077899911490]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: g6glQDeRpF53yn9JNsmrsA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028729688.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02962378646229524293,  38.89831574966429883489]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: L3uzfadSEhdmpwXCGaMKzw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026390846.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02354698804680310786,  38.88416948302619857714]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: P8Pl45fMr25bjeNtqf0KyA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-22?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024796863.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.04289249999999356078,  38.90536120000000153141]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: jWw5BkHz3bp_AJ5-L92Ssg<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12022968696.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-76.99726099999999462398,  38.87603000000000008640]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: AQs923FQs3w6h9CDIGM7TQ<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-26?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12026788127.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03991999999999507054,  38.89936999999999756028]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: RqNSX_foyCh_QMUUwjwEqw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-11?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028879331.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.00971979999999916799,  38.90050130000000194741]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: Mw3qFdb9riAVXGZPKsBwuA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12027891397.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03243000000000506589,  38.90400000000000346745]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: J9hOzJ9q64Xr8stWI5ktxA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-19?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028421179.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03236468344300647004,  38.90149389383299904921]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: aeQhjX771zWQwR5VHN7oUw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12028422467.0',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.03907800000000349883,  38.90059699999999764941]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: -WZqhx3qIVE_unJ6-hS5EA<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-35?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Au Bon Pain"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.02354698804680310786,  38.88416948302619857714]
+    },
+    properties: {
+      description: 'Au Bon Pain<br>yelp_id: QjT9WCmqDhfHqhlERrxJFw<br><a href=\'https://www.yelp.com/biz/au-bon-pain-washington-14?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 12024889449.0',
+      chain_name: "Au Bon Pain"
+    }
+  }],
+          },
+        })
+
+        map.addLayer({
+          id: 'points',
+          type: 'circle',
+          paint: {
+            'circle-blur': 0.1,
+            'circle-radius': {
+              base: 2,
+              stops: [[11, 5], [14, 8], [22, 180]],
+            },
+            'circle-color': {
+              property: 'chain_name',
+              default: '#FF7616',
+              type: 'categorical',
+              stops: [
+                  ["Starbucks", "#fbb03b"],["Dunkin' Donuts", "#223b53"],["Au Bon Pain", "#e55e5e"] 
+              ],
+            },
+            'circle-opacity': 0.7,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': 'black',
+            'circle-stroke-opacity': 0.5,
+          },
+          source: 'points',
+        })
+
+        // Add checkbox and label elements for each chain
+        var input1 = document.createElement('input');
+        input1.type = 'checkbox';
+        input1.id = 'input1';
+        input1.checked = true;
+        filterGroup.appendChild(input1);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input1');
+        label.textContent = "Starbucks";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer. 
+        var input2 = document.createElement('input');
+        input2.type = 'checkbox';
+        input2.id = 'input2';
+        input2.checked = true;
+        filterGroup.appendChild(input2);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input2');
+        label.textContent = "Dunkin' Donuts";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer.
+        var input3 = document.createElement('input');
+        input3.type = 'checkbox';
+        input3.id = 'input3';
+        input3.checked = true;
+        filterGroup.appendChild(input3);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input3');
+        label.textContent = "Au Bon Pain";
+        filterGroup.appendChild(label);
+
+        // When the checkbox changes, update the visibility of the layer.
+        //input1.addEventListener('change', function(e) {console.log("Alive")});
+        input1.addEventListener('change', function(e) {adjustFilters(map);});        
+        input2.addEventListener('change', function(e) {adjustFilters(map);});
+        input3.addEventListener('change', function(e) {adjustFilters(map);});
+
+
+
+        // input1.addEventListener('change', function(e) {
+        //     console.log("Alive!")
+        //     var filtCondition = '=='
+        //     if (!e['target']['checked']) {
+        //       filtCondition = '!='
+        //     }
+        //     var filter = [filtCondition, 'chain_name', "Starbucks"]
+        //     map.setFilter('points', filter)
+        // });
+
+	      map.setCenter([-77.03051098184451, 38.90544392770245])
+        map.zoomTo(11)
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'points', function (e, i) {
+
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'points', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'points', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
+    map.on('load', onMapLoad)
+
+</script>

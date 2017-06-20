@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+    .filter-group {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        border-radius: 3px;
+        width: 120px;
+        color: #fff;
+    }
+
+    .filter-group input[type=checkbox]:first-child + label {
+        border-radius: 3px 3px 0 0;
+    }
+
+    .filter-group label:last-child {
+        border-radius: 0 0 3px 3px;
+        border: none;
+    }
+
+    .filter-group input[type=checkbox] {
+        display: none;
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        text-transform: capitalize;
+    }
+
+    .filter-group input[type=checkbox] + label:hover,
+    .filter-group input[type=checkbox]:checked + label {
+        background-color: #4ea0da;
+    }
+
+    .filter-group input[type=checkbox]:checked + label:before {
+        content: '✔';
+        margin-right: 5px;
+    }
+</style>
+
+<div id='map' style='width: 100%; height: 100%;'></div>
+<nav id='filter-group' class='filter-group'></nav>
+
+<script>
+
+    function adjustFilters(map) {
+        var input1 = document.getElementById('input1');
+        var input2 = document.getElementById('input2');
+        var input3 = document.getElementById('input3');
+
+        filt_list = ["any"]
+        
+        filt1 = ['==', 'chain_name', "Starbucks"]
+        if (input1.checked) {filt_list.push(filt1);}
+        
+        filt2 = ['==', 'chain_name', "Ebar"]
+        if (input2.checked) {filt_list.push(filt2);}
+        
+        filt3 = ['==', 'chain_name', "The Coffee Bean & Tea Leaf"]
+        if (input3.checked) {filt_list.push(filt3);}
+
+        map.setFilter("points", filt_list);
+    }
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q'
+
+    var filterGroup = document.getElementById('filter-group');
+    
+    map = new mapboxgl.Map({
+      container: document.getElementById("map"),
+      logoPosition: 'bottom-right',
+      style: 'mapbox://styles/dwasco/cj0n4fxjp003q2rnyu3r18dd1',
+    });
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+
+    onMapLoad = () => {
+        isMapLoaded = true
+        map.addSource('points', {
+          type: 'geojson',
+          cluster: false,
+          clusterMaxZoom: 16, // Max zoom to cluster points on
+          clusterRadius: 2.5, // Radius of each cluster when clustering points (defaults to 50)
+          data: {
+            type: 'FeatureCollection',
+            features: [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.83728356715940321919,  30.22214314319100125772]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: iI8dOFNg8lSD7_h6fB1Q1g<br><a href=\'https://www.yelp.com/biz/starbucks-austin-66?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123589471.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.87898199999999349075,  30.20298700000000025057]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3gYJoiZ9M7BIWbKaWSyJlA<br><a href=\'https://www.yelp.com/biz/starbucks-austin?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122882309.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74443054199220171085,  30.27799224853519888256]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 1kBzlu-sFabunenL1DVUbw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-36?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124789090.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.73217464674630150512,  30.28486754963130067608]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 8wXjN5y1UBCCNFujMJ-mqA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-97?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124718915.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.70265999999999451120,  30.41886999999999829924]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PcLagfMcNNA0VwCJ6szlDQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15129739046.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.79281079999999803931,  30.23639280000000084669]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: h3CYDlKFUrZaJWbTgxW9IQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-78?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124167509.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.76406000000000062755,  30.30423000000000044452]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: AA1Wwu4LbVpd-FtVeyC-ZA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-72?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124782288.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.79742418527780500881,  30.47576556379739898262]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: nOAYfiSf187uXSvLyzMYhw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-101?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15126513376.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.80747056007389517163,  30.25751031906959909179]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 0jlyrJD6QAw3mtDuqSw5Jw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-24?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15127328340.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.68976999999999577540,  30.21781000000000005912]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DDynNCGdOOZ3xt70ubWlrQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-17?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123868826.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74239300000000696400,  30.23365400000000136060]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: Smn-qPRbnanM_I8gspb_Sw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-76?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15127070039.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.78808999999999684860,  30.16549399999999891975]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: CV4ssWHaKQ3Rid8u3ajuCw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-39?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122918365.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.80398559570309657829,  30.47637557983399858585]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: r90HOnRCJgU0l0nrXMLGcw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-98?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122490820.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.73641999999999541160,  30.28416999999999958959]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: F0YYSqYmVUDKg1hbtanAow<br><a href=\'https://www.yelp.com/biz/starbucks-austin-28?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124716163.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.76351165771480111744,  30.25191879272459871686]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: p18rvKx5-Nw2TOPPEJ25sQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-38?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123261783.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.75804899999999975080,  30.37141989999999935890]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ng7bicJ-ocJiwxbd9lZJhQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-45?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123451825.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74385999999999796728,  30.39287799999999961642]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: y29qaSu61-pbXQY0IRP7Nw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-69?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15126871315.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.75892995297910204044,  30.24211101210169871933]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: sxJG2vDnCMBTRq32GObUXg<br><a href=\'https://www.yelp.com/biz/starbucks-austin-100?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15125346654.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.96997182936090098337,  30.33996167507559960086]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: zJqNsdRHw3T0QKBTTO85AQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-42?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.75700000000000500222,  30.33697000000000087994]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 45HscRdEF-tp12UyFJn0DA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-52?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124585574.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74367230702159758948,  30.44486969072120174928]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: RhcVws6Mncwubbhi2IYkbg<br><a href=\'https://www.yelp.com/biz/starbucks-austin-11?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123317314.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74263999999999441570,  30.28791000000000011028]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: XzQaLaSwS_ae1EAmTQ0aWA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-23?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124725211.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.72606042619449340236,  30.40187385410349918402]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: sgLmoM63aKky_R_TKq5diA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123399405.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.93430149555210562085,  30.30475174162150153734]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: YKwVqpzIUv97eH-67_8kHA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-71?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122631866.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.75353133678440542553,  30.26986867189409835532]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: zZmMcfN2Z7O4Q_2X7grodw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15127089103.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.72313685143519990106,  30.49825668379289922427]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: DwWY48cZZ05Xp0YXmeeOhg<br><a href=\'https://www.yelp.com/biz/starbucks-austin-92?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123105683.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.70800721877600381049,  30.30582202121080115376]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ZAvXG6rCF8xyzyUr4_nf3A<br><a href=\'https://www.yelp.com/biz/starbucks-austin-19?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123911801.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.80013442649240573701,  30.27586353258709905845]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: I5ksg_UYSqH6sUDY6Cf1JA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-95?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123068744.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74046325683589486744,  30.26564788818360085543]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: VzaMxVcvdLwwdrYJwJziKw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-16?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15126919222.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.87408999999999537067,  30.23252000000000094815]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: FuCx_MkgCkwpsAs8wXt-Qw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-13?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122880662.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.73793836522069966577,  30.35981122878689930644]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 3NFpMYEfMYw5BNczR7_qlA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-21?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124671548.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.81540999999999996817,  30.20793000000000105842]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: yw5Vzs-t1lA696eKkP16tQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-75?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124447494.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74128000000000326963,  30.27176000000000044565]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: IBgJ1q6lh8u_ootx10nHmw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-49?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122360061.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74296214399440430043,  30.26831922828689869220]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: fwJuUYkUlOwHe6n4loRo3w<br><a href=\'https://www.yelp.com/biz/starbucks-austin-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124990250.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74129811674359302742,  30.28664972958939927139]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: A3gVE_TtGC8swcBYE3rCfg<br><a href=\'https://www.yelp.com/biz/starbucks-austin-88?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124756500.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.88195550441740522274,  30.38973659276960148645]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: OKPtcundSL2TGtaX4ne8HQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-62?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122663168.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74690999999999974079,  30.25919999999999987494]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: nQh2dwvcBYpsLX5qBXWb5w<br><a href=\'https://www.yelp.com/biz/starbucks-austin-65?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124771234.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74364537037089917249,  30.26436800404029980882]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 2OWVJAoPHQucVOWxP-FbUw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-102?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124744777.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.72829772032200423837,  30.24318995934229903355]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _Dl1YmHct9J0Nn7KsbTW_w<br><a href=\'https://www.yelp.com/biz/starbucks-austin-93?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.75645446777339486744,  30.35458564758300070707]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: mFubp5U-F1eFnYK7mzLDwA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-73?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123428544.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.73860999999999421561,  30.30249999999999843681]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: BBzLOGz_7ufzBNlhMjvgIA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-82?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123800439.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.75810237211889841547,  30.22064273377030119150]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: osIJajg3nlSR-xhMDyXwZw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15129129188.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74651959981079585305,  30.26585274547780102239]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: AERUqZrK0v0I0rgf91Csjg<br><a href=\'https://www.yelp.com/biz/starbucks-austin-60?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123911895.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.73857265710830688477,  30.31221069395540013147]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: jxJ4slFeCcKoAgXQn1X5AA<br><a href=\'https://www.yelp.com/biz/starbucks-austin-15?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123749784.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74738299999999924239,  30.40169099999999957618]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: _-YtxRvghRMlEHG3KU2s1w<br><a href=\'https://www.yelp.com/biz/starbucks-austin-74?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123422737.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.79157514837510234429,  30.44799608706430049665]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: PQ4vdBi1fBKP3fjyNqCv6w<br><a href=\'https://www.yelp.com/biz/starbucks-austin-55?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124016253.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.84700775146480111744,  30.18275260925290126579]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 67w0M7LneP7STSN-_c263g<br><a href=\'https://www.yelp.com/biz/starbucks-austin-43?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122802450.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.78781809781439449125,  30.16570019620539966354]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ba80PpO0ZE1J0aVuSvSfzQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-81?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122918365.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.85130370038599778582,  30.40554685441160032155]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: s-OqnpY3vad04l0MIXqNQg<br><a href=\'https://www.yelp.com/biz/starbucks-austin-41?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122503533.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.75261216151579901634,  30.39485013783160027856]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: GUpO-tDdbmRJmEvuyZ_5Fg<br><a href=\'https://www.yelp.com/biz/starbucks-austin-20?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15127951965.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.80510713412439827152,  30.47709604984810027872]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: ZQvaxlMg8IocLXkR-vgCFw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-54?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: nan',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.82713492009879985289,  30.45303851862249899796]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: 7F9YIigg9cJEHFNBqk7qCw<br><a href=\'https://www.yelp.com/biz/starbucks-austin-33?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122508066.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.69996017130280563379,  30.30146983203229993364]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: -M_2-RVQ0JifZO13sjS4QQ<br><a href=\'https://www.yelp.com/biz/starbucks-austin-91?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124800684.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.68823542793180081389,  30.41327665218339859621]
+    },
+    properties: {
+      description: 'Starbucks<br>yelp_id: adGp9qR8ahVVrOuWj3B7Ig<br><a href=\'https://www.yelp.com/biz/starbucks-austin-22?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15128337272.0',
+      chain_name: "Starbucks"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.74668121337890625000,  30.26836585998540130049]
+    },
+    properties: {
+      description: 'Big Dog Rebar Gunite Reinforcement<br>yelp_id: IvdMS7AwmF_HCExj1AsInQ<br><a href=\'https://www.yelp.com/biz/big-dog-rebar-gunite-reinforcement-austin?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123312772.0',
+      chain_name: "Ebar"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.72061247344829837402,  30.40257837749920000192]
+    },
+    properties: {
+      description: 'Ebar<br>yelp_id: 1G7oMiwrXiAIIUK04Z-K6Q<br><a href=\'https://www.yelp.com/biz/ebar-austin-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 18777945304.0',
+      chain_name: "Ebar"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.69389343261720171085,  30.25743293762209873421]
+    },
+    properties: {
+      description: 'Ponce Rebar<br>yelp_id: zSYvWzWS6ahk2DPlVE7F-g<br><a href=\'https://www.yelp.com/biz/ponce-rebar-austin-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123859262.0',
+      chain_name: "Ebar"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.80107879638670453915,  30.25253295898439986900]
+    },
+    properties: {
+      description: 'Linebarger Goggan Blair & Sampson, LLP<br>yelp_id: 9kmmO3utSu4RcSUj7UDiFg<br><a href=\'https://www.yelp.com/biz/linebarger-goggan-blair-and-sampson-llp-austin-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124476675.0',
+      chain_name: "Ebar"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.80845224857330322266,  30.25851667836349889740]
+    },
+    properties: {
+      description: 'Ebar<br>yelp_id: q7Doxgkv5vOEZMarDPx0gw<br><a href=\'https://www.yelp.com/biz/ebar-austin-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15126913500.0',
+      chain_name: "Ebar"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.73726000000000624368,  30.19450000000000144951]
+    },
+    properties: {
+      description: 'Etebari<br>yelp_id: drhV-6dnIzRPj5Z-Bac6pA<br><a href=\'https://www.yelp.com/biz/etebari-austin-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15126661541.0',
+      chain_name: "Ebar"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.86952972412109375000,  30.19972229003910157985]
+    },
+    properties: {
+      description: 'The Coffee Bean & Tea Leaf<br>yelp_id: UrHcIvT02T82Vc8Kg4Xg3A<br><a href=\'https://www.yelp.com/biz/the-coffee-bean-and-tea-leaf-austin-9?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123949010.0',
+      chain_name: "The Coffee Bean & Tea Leaf"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.79009899999999788633,  30.44586100000000072896]
+    },
+    properties: {
+      description: 'The Coffee Bean and Tea Leaf<br>yelp_id: nxll8nMclGurgoVEpQl44A<br><a href=\'https://www.yelp.com/biz/the-coffee-bean-and-tea-leaf-austin-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122199256.0',
+      chain_name: "The Coffee Bean & Tea Leaf"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.72187835204699979386,  30.30000504027159990983]
+    },
+    properties: {
+      description: 'The Coffee Bean & Tea Leaf<br>yelp_id: mrQbmB_t5njVFLMpykn6kw<br><a href=\'https://www.yelp.com/biz/the-coffee-bean-and-tea-leaf-austin-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123518676.0',
+      chain_name: "The Coffee Bean & Tea Leaf"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.82185037718140563356,  30.23606583756630072912]
+    },
+    properties: {
+      description: 'The Coffee Bean & Tea Leaf<br>yelp_id: -IWVTkOtAOobJw3mKh1ZJg<br><a href=\'https://www.yelp.com/biz/the-coffee-bean-and-tea-leaf-austin-13?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15124946348.0',
+      chain_name: "The Coffee Bean & Tea Leaf"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.88403884655760123223,  30.38798671556120112314]
+    },
+    properties: {
+      description: 'The Coffee Bean and Tea Leaf<br>yelp_id: gy62qQBpusf79ipad8tOig<br><a href=\'https://www.yelp.com/biz/the-coffee-bean-and-tea-leaf-austin-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15122666616.0',
+      chain_name: "The Coffee Bean & Tea Leaf"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-97.75741999999999620741,  30.26267999999999958050]
+    },
+    properties: {
+      description: 'The Coffee Bean and Tea Leaf<br>yelp_id: iswzGZwTRVP3bVWvLhALzw<br><a href=\'https://www.yelp.com/biz/the-coffee-bean-and-tea-leaf-austin?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>phone: 15123518680.0',
+      chain_name: "The Coffee Bean & Tea Leaf"
+    }
+  }],
+          },
+        })
+
+        map.addLayer({
+          id: 'points',
+          type: 'circle',
+          paint: {
+            'circle-blur': 0.1,
+            'circle-radius': {
+              base: 2,
+              stops: [[11, 5], [14, 8], [22, 180]],
+            },
+            'circle-color': {
+              property: 'chain_name',
+              default: '#FF7616',
+              type: 'categorical',
+              stops: [
+                  ["Starbucks", "#fbb03b"],["Ebar", "#223b53"],["The Coffee Bean & Tea Leaf", "#e55e5e"] 
+              ],
+            },
+            'circle-opacity': 0.7,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': 'black',
+            'circle-stroke-opacity': 0.5,
+          },
+          source: 'points',
+        })
+
+        // Add checkbox and label elements for each chain
+        var input1 = document.createElement('input');
+        input1.type = 'checkbox';
+        input1.id = 'input1';
+        input1.checked = true;
+        filterGroup.appendChild(input1);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input1');
+        label.textContent = "Starbucks";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer. 
+        var input2 = document.createElement('input');
+        input2.type = 'checkbox';
+        input2.id = 'input2';
+        input2.checked = true;
+        filterGroup.appendChild(input2);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input2');
+        label.textContent = "Ebar";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer.
+        var input3 = document.createElement('input');
+        input3.type = 'checkbox';
+        input3.id = 'input3';
+        input3.checked = true;
+        filterGroup.appendChild(input3);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input3');
+        label.textContent = "The Coffee Bean & Tea Leaf";
+        filterGroup.appendChild(label);
+
+        // When the checkbox changes, update the visibility of the layer.
+        //input1.addEventListener('change', function(e) {console.log("Alive")});
+        input1.addEventListener('change', function(e) {adjustFilters(map);});        
+        input2.addEventListener('change', function(e) {adjustFilters(map);});
+        input3.addEventListener('change', function(e) {adjustFilters(map);});
+
+
+
+        // input1.addEventListener('change', function(e) {
+        //     console.log("Alive!")
+        //     var filtCondition = '=='
+        //     if (!e['target']['checked']) {
+        //       filtCondition = '!='
+        //     }
+        //     var filter = [filtCondition, 'chain_name', "Starbucks"]
+        //     map.setFilter('points', filter)
+        // });
+
+	      map.setCenter([-97.77400307501976, 30.309050422197302])
+        map.zoomTo(11)
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'points', function (e, i) {
+
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'points', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'points', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
+    map.on('load', onMapLoad)
+
+</script>
