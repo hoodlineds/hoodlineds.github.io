@@ -1,0 +1,2999 @@
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+
+<div id='map' style='width: 100%; height: 100%;'></div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q'
+    map = new mapboxgl.Map({
+      container: document.getElementById("map"),
+      logoPosition: 'bottom-right',
+      style: 'mapbox://styles/dwasco/cj0n4fxjp003q2rnyu3r18dd1',
+    });
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+
+    onMapLoad = () => {
+        isMapLoaded = true
+        map.addSource('points', {
+          type: 'geojson',
+          cluster: false,
+          clusterMaxZoom: 16, // Max zoom to cluster points on
+          clusterRadius: 2.5, // Radius of each cluster when clustering points (defaults to 50)
+          data: {
+            type: 'FeatureCollection',
+            features: [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.49795000000000300133,  37.77546999999999854936]
+    },
+    properties: {
+      description: '<b>Name:</b> Balboa Produce Market<br><br><b> Neighborhood: </b> ["Outer Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43752270937000048434,  37.79851086437700047327]
+    },
+    properties: {
+      description: '<b>Name:</b> The Hollow Cow Market<br><br><b> Neighborhood: </b> ["Marina/Cow Hollow"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42144129999999790925,  37.75864589999999765269]
+    },
+    properties: {
+      description: '<b>Name:</b> Golden Eagle Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.38764953613299724111,  37.74158477783199572286]
+    },
+    properties: {
+      description: '<b>Name:</b> Walgreens<br><br><b> Neighborhood: </b> ["Bayview-Hunters Point"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40205049514798929522,  37.72376306355000252779]
+    },
+    properties: {
+      description: '<b>Name:</b> Foothill Market<br><br><b> Neighborhood: </b> ["Visitacion Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41949590000000114287,  37.74647539999999423799]
+    },
+    properties: {
+      description: '<b>Name:</b> Fairview Market 2<br><br><b> Neighborhood: </b> ["Bernal Heights", "Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46358999999999639385,  37.78322999999999609599]
+    },
+    properties: {
+      description: '<b>Name:</b> Lien Hing Supermarket Number Three<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41621999999999559350,  37.75384999999999990905]
+    },
+    properties: {
+      description: '<b>Name:</b> Casa Maria<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44326019287099427402,  37.77597427368160509786]
+    },
+    properties: {
+      description: '<b>Name:</b> Nimer\'s Market<br><br><b> Neighborhood: </b> ["NoPa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40286540000001025419,  37.77990009999999898582]
+    },
+    properties: {
+      description: '<b>Name:</b> Harvey\'s Place<br><br><b> Neighborhood: </b> ["SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48328640000001144017,  37.77995860000000050150]
+    },
+    properties: {
+      description: '<b>Name:</b> Seakor Polish Delicatessen<br><br><b> Neighborhood: </b> ["Outer Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41441999999999268312,  37.78580999999999789907]
+    },
+    properties: {
+      description: '<b>Name:</b> Right Way Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41963958740200268949,  37.77711868286129259786]
+    },
+    properties: {
+      description: '<b>Name:</b> Malik Ranch Nuts<br><br><b> Neighborhood: </b> ["SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45279693603499993060,  37.76435089111329546085]
+    },
+    properties: {
+      description: '<b>Name:</b> Sunny Country Foods<br><br><b> Neighborhood: </b> ["Inner Sunset", "Twin Peaks"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40592399999999884130,  37.79498199999999741294]
+    },
+    properties: {
+      description: '<b>Name:</b> Chiang Sun Market<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40911000000001251919,  37.79870999999999980901]
+    },
+    properties: {
+      description: '<b>Name:</b> Lee\'s Market<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41453999999998814019,  37.73906999999999811735]
+    },
+    properties: {
+      description: '<b>Name:</b> Pay Little Market<br><br><b> Neighborhood: </b> ["Bernal Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42058000000000106411,  37.79917999999999977945]
+    },
+    properties: {
+      description: '<b>Name:</b> Pegasus Food Shop<br><br><b> Neighborhood: </b> ["Russian Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40562051534701026867,  37.73230589926239986198]
+    },
+    properties: {
+      description: '<b>Name:</b> Baby Nutritional Care<br><br><b> Neighborhood: </b> ["Excelsior", "Portola"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41814399999999807278,  37.75283400000000000318]
+    },
+    properties: {
+      description: '<b>Name:</b> Mi Pueblito Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40865330000001165445,  37.79653170000000272921]
+    },
+    properties: {
+      description: '<b>Name:</b> Kwong Cheong Tai<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42859967052899605733,  37.77230702340600032585]
+    },
+    properties: {
+      description: '<b>Name:</b> S & W Market<br><br><b> Neighborhood: </b> ["Lower Haight", "Hayes Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42267620000001215885,  37.74106989999999939300]
+    },
+    properties: {
+      description: '<b>Name:</b> World Beers<br><br><b> Neighborhood: </b> ["Bernal Heights", "Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41887398064099556905,  37.75715924799440159632]
+    },
+    properties: {
+      description: '<b>Name:</b> Mike\'s Liquors & Groceries<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43018619716200134917,  37.79685460031029720085]
+    },
+    properties: {
+      description: '<b>Name:</b> Green Street Market<br><br><b> Neighborhood: </b> ["Pacific Heights", "Marina/Cow Hollow"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44147628545799477706,  37.72683687508109784403]
+    },
+    properties: {
+      description: '<b>Name:</b> Roxie Food Center<br><br><b> Neighborhood: </b> ["Outer Mission", "Mission Terrace"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41755000000000563887,  37.78462999999999993861]
+    },
+    properties: {
+      description: '<b>Name:</b> Hiep-Thanh Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40857161581499212843,  37.79781214892859964039]
+    },
+    properties: {
+      description: '<b>Name:</b> Pang Kee Bargain Market<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41422101855300752504,  37.78282061219220366866]
+    },
+    properties: {
+      description: '<b>Name:</b> Maryland Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41077035665500716277,  37.75276310741899976620]
+    },
+    properties: {
+      description: '<b>Name:</b> GGP Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41943559999998569765,  37.76073339999999944894]
+    },
+    properties: {
+      description: '<b>Name:</b> George\'s Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40713500976600869308,  37.79511260986329546085]
+    },
+    properties: {
+      description: '<b>Name:</b> Wang Chung Company<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43423163890800253739,  37.73343980312349543738]
+    },
+    properties: {
+      description: '<b>Name:</b> Glen Park Market<br><br><b> Neighborhood: </b> ["Outer Mission", "Sunnyside", "Glen Park"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48301999999999623014,  37.78235000000000098908]
+    },
+    properties: {
+      description: '<b>Name:</b> El Chico Produce<br><br><b> Neighborhood: </b> ["Outer Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46632999999999924512,  37.76199400000000139244]
+    },
+    properties: {
+      description: '<b>Name:</b> Royal Food Store<br><br><b> Neighborhood: </b> ["Inner Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42103315889798409444,  37.75677569210530037935]
+    },
+    properties: {
+      description: '<b>Name:</b> Decamere Supermarket<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42036999999999125066,  37.78788000000000124601]
+    },
+    properties: {
+      description: '<b>Name:</b> Discount Grocers<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46461359999999274351,  37.78307370000000275923]
+    },
+    properties: {
+      description: '<b>Name:</b> Food 24 Hour Convenience Market<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46645780000000058862,  37.78274620000000538766]
+    },
+    properties: {
+      description: '<b>Name:</b> Yin Xing Food<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40440368652299696350,  37.71122741699220171085]
+    },
+    properties: {
+      description: '<b>Name:</b> G & K Groceries<br><br><b> Neighborhood: </b> ["Visitacion Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41956733167199899981,  37.76461243629460540205]
+    },
+    properties: {
+      description: '<b>Name:</b> Mi Tierra Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41293999999999186912,  37.78280000000000171667]
+    },
+    properties: {
+      description: '<b>Name:</b> Radman\'s Produce Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39487394261101371740,  37.72484419132280208942]
+    },
+    properties: {
+      description: '<b>Name:</b> Duc Loi\'s Pantry<br><br><b> Neighborhood: </b> ["Bayview-Hunters Point"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39751000000001113222,  37.79176999999999964075]
+    },
+    properties: {
+      description: '<b>Name:</b> Russell Convenience<br><br><b> Neighborhood: </b> ["Financial District", "SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43096160888700296709,  37.78980636596679687500]
+    },
+    properties: {
+      description: '<b>Name:</b> Buchanan Market & Deli<br><br><b> Neighborhood: </b> ["Pacific Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39613890647899552278,  37.79512926936150307711]
+    },
+    properties: {
+      description: '<b>Name:</b> 5th Avenue Deli & Market<br><br><b> Neighborhood: </b> ["Financial District"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43861129999999093343,  37.76213359999999852334]
+    },
+    properties: {
+      description: '<b>Name:</b> Eureka Market<br><br><b> Neighborhood: </b> ["Castro"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40984344482400558718,  37.78448867797850141415]
+    },
+    properties: {
+      description: '<b>Name:</b> Superette 128<br><br><b> Neighborhood: </b> ["Tenderloin", "Union Square"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47860208153700511957,  37.76345036923889608715]
+    },
+    properties: {
+      description: '<b>Name:</b> Wah Sing Supermarket<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41028600000001347325,  37.79679390000000438476]
+    },
+    properties: {
+      description: '<b>Name:</b> Sam & Son Market<br><br><b> Neighborhood: </b> ["Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42085049999998602743,  37.74442859999999910769]
+    },
+    properties: {
+      description: '<b>Name:</b> Azteca Produce<br><br><b> Neighborhood: </b> ["Bernal Heights", "Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44324493408198861744,  37.78409957885740055872]
+    },
+    properties: {
+      description: '<b>Name:</b> Royal Market<br><br><b> Neighborhood: </b> ["Lower Pacific Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46856999999999970896,  37.73877999999999843794]
+    },
+    properties: {
+      description: '<b>Name:</b> West Portal Produce Market<br><br><b> Neighborhood: </b> ["West Portal"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41859999999999786269,  37.75144000000000232831]
+    },
+    properties: {
+      description: '<b>Name:</b> La Loma Produce No 8<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41024028509899324035,  37.79656368296650015282]
+    },
+    properties: {
+      description: '<b>Name:</b> Powell Grocery<br><br><b> Neighborhood: </b> ["Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41793060302700268949,  37.75044631958009944128]
+    },
+    properties: {
+      description: '<b>Name:</b> Casa Guadalupe<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41955000000000097771,  37.75217999999999562988]
+    },
+    properties: {
+      description: '<b>Name:</b> Hector\'s Produce Truck<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41029357910200303650,  37.79858398437500000000]
+    },
+    properties: {
+      description: '<b>Name:</b> Sun Sun Grocery<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40862391889099569653,  37.79746480286120657865]
+    },
+    properties: {
+      description: '<b>Name:</b> Kum Luen<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43216999999999927695,  37.77980000000000160298]
+    },
+    properties: {
+      description: '<b>Name:</b> Charlie\'s Pharmacy<br><br><b> Neighborhood: </b> ["Alamo Square"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47860208153700511957,  37.76345036923889608715]
+    },
+    properties: {
+      description: '<b>Name:</b> Wah Lian Supermarket<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40275122225300208356,  37.72543273866179447396]
+    },
+    properties: {
+      description: '<b>Name:</b> Tierra Santa Market<br><br><b> Neighborhood: </b> ["Excelsior", "Portola"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41586999999999818556,  37.78235000000000098908]
+    },
+    properties: {
+      description: '<b>Name:</b> Hyde Grocery<br><br><b> Neighborhood: </b> ["Civic Center"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40763999999998645762,  37.79390989999999561633]
+    },
+    properties: {
+      description: '<b>Name:</b> D & D Market<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48054504394501407205,  37.76316452026370740214]
+    },
+    properties: {
+      description: '<b>Name:</b> 22nd & Irving Market<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48801060020900877134,  37.74254992604259939526]
+    },
+    properties: {
+      description: '<b>Name:</b> Asian American Food Company<br><br><b> Neighborhood: </b> ["Parkside"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.38969625911001060103,  37.73674538868299777050]
+    },
+    properties: {
+      description: '<b>Name:</b> Super Save Meat Market<br><br><b> Neighborhood: </b> ["Bayview-Hunters Point"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42067843675600613551,  37.79026642441750283297]
+    },
+    properties: {
+      description: '<b>Name:</b> Golden Veggie Market<br><br><b> Neighborhood: </b> ["Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48066671192600551876,  37.76336587965489854923]
+    },
+    properties: {
+      description: '<b>Name:</b> New May Cheung<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46517383068800199908,  37.78232309171769998102]
+    },
+    properties: {
+      description: '<b>Name:</b> Smart & Final<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40760040283198861744,  37.77970504760740055872]
+    },
+    properties: {
+      description: '<b>Name:</b> Mi Tierra<br><br><b> Neighborhood: </b> ["SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45223339999999723204,  37.71212410000000403443]
+    },
+    properties: {
+      description: '<b>Name:</b> Pacific Supermarket<br><br><b> Neighborhood: </b> ["Outer Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40765090000000725468,  37.79394620000000770688]
+    },
+    properties: {
+      description: '<b>Name:</b> Wing Scene Food<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41967999999999960892,  37.72890999999999905867]
+    },
+    properties: {
+      description: '<b>Name:</b> Hillcrest Market<br><br><b> Neighborhood: </b> ["Excelsior", "Portola"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42388904094700308178,  37.76331089437010035681]
+    },
+    properties: {
+      description: '<b>Name:</b> Hom\'s Grocery<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40686999999999784450,  37.79616000000000042292]
+    },
+    properties: {
+      description: '<b>Name:</b> Hua Long Trading<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41093799999998736894,  37.75329299999999932425]
+    },
+    properties: {
+      description: '<b>Name:</b> Casa Lucas Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41852000000000089130,  37.74949000000000154387]
+    },
+    properties: {
+      description: '<b>Name:</b> Ana Dollar Store<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42441920000000266100,  37.76650229999999908159]
+    },
+    properties: {
+      description: '<b>Name:</b> Spot Lite Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41610000000000013642,  37.76785000000000280806]
+    },
+    properties: {
+      description: '<b>Name:</b> Foods Co<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42070861160800632206,  37.74447843432430005350]
+    },
+    properties: {
+      description: '<b>Name:</b> D/J Market<br><br><b> Neighborhood: </b> ["Bernal Heights", "Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41076968610299502416,  37.78413824737069859339]
+    },
+    properties: {
+      description: '<b>Name:</b> Cool Super Discount<br><br><b> Neighborhood: </b> ["Tenderloin", "Union Square"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.50483719999999721040,  37.75284589999999695920]
+    },
+    properties: {
+      description: '<b>Name:</b> Brothers Mini Market<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40848000000001150056,  37.79554000000000257842]
+    },
+    properties: {
+      description: '<b>Name:</b> Yue Fung Grocery<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47806765139098672535,  37.76347048580650067606]
+    },
+    properties: {
+      description: '<b>Name:</b> Lucca Food Deli & Wine Shop<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41174316406200262008,  37.78179931640620026201]
+    },
+    properties: {
+      description: '<b>Name:</b> Dhaka Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41953329999998345556,  37.78574470000000218306]
+    },
+    properties: {
+      description: '<b>Name:</b> California Produce<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41890415549299575559,  37.75756828486920113619]
+    },
+    properties: {
+      description: '<b>Name:</b> Sealand Trading<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39741516113299724111,  37.75976562500000000000]
+    },
+    properties: {
+      description: '<b>Name:</b> Dave\'s Food Store<br><br><b> Neighborhood: </b> ["Potrero Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46875729999999293796,  37.78273409999999898901]
+    },
+    properties: {
+      description: '<b>Name:</b> Apple Land Produce<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40339660644501407205,  37.72788238525389914457]
+    },
+    properties: {
+      description: '<b>Name:</b> La Loma Produce No 7<br><br><b> Neighborhood: </b> ["Excelsior", "Portola"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41904999999999859028,  37.76238000000000027967]
+    },
+    properties: {
+      description: '<b>Name:</b> Mi Ranchito<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40772247314501441906,  37.80040359497070312500]
+    },
+    properties: {
+      description: '<b>Name:</b> S & S Grocery<br><br><b> Neighborhood: </b> ["North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.50231933593799737992,  37.74212646484379973799]
+    },
+    properties: {
+      description: '<b>Name:</b> Amity Market<br><br><b> Neighborhood: </b> ["Parkside"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40782998502299960819,  37.79425218701360478235]
+    },
+    properties: {
+      description: '<b>Name:</b> Long Hua\'s Grocery Store<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41764899999999727243,  37.78626170000000428217]
+    },
+    properties: {
+      description: '<b>Name:</b> Mid City Market<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43156489999999791962,  37.72865670000000193340]
+    },
+    properties: {
+      description: '<b>Name:</b> Mission Silver Market<br><br><b> Neighborhood: </b> ["Outer Mission", "Mission Terrace"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46849740000001816043,  37.78259639999999563997]
+    },
+    properties: {
+      description: '<b>Name:</b> Cable Car Wine And Spirits<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41840362548799703291,  37.74889373779300427714]
+    },
+    properties: {
+      description: '<b>Name:</b> Stop & Shop Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41509743034799839734,  37.78654418885709986853]
+    },
+    properties: {
+      description: '<b>Name:</b> Crown Market & Liquor<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45312243700000465196,  37.76630423963070626314]
+    },
+    properties: {
+      description: '<b>Name:</b> Parkview Market<br><br><b> Neighborhood: </b> ["Inner Sunset", "Cole Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40476989746099434342,  37.71184539794920453915]
+    },
+    properties: {
+      description: '<b>Name:</b> Casa Maria #2<br><br><b> Neighborhood: </b> ["Visitacion Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41857147216801138256,  37.78625869750980115214]
+    },
+    properties: {
+      description: '<b>Name:</b> Salem Grocery<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41973564028700138806,  37.78776124119760027043]
+    },
+    properties: {
+      description: '<b>Name:</b> Super One<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40820884704599791348,  37.79604859650140014082]
+    },
+    properties: {
+      description: '<b>Name:</b> Lien Hing Supermarket<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48759869999999239099,  37.77967110000000161563]
+    },
+    properties: {
+      description: '<b>Name:</b> Grocery Outlet Bargain Market<br><br><b> Neighborhood: </b> ["Outer Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46231999999999118245,  37.76436999999999954980]
+    },
+    properties: {
+      description: '<b>Name:</b> KJ Produce Market<br><br><b> Neighborhood: </b> ["Inner Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40891225636001138355,  37.79578976333139905819]
+    },
+    properties: {
+      description: '<b>Name:</b> Golden Mountain Market<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40685000000000570708,  37.79547999999999774445]
+    },
+    properties: {
+      description: '<b>Name:</b> Nan Hai Corporation<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42290496826200296709,  37.74145889282230115214]
+    },
+    properties: {
+      description: '<b>Name:</b> El Ahorro<br><br><b> Neighborhood: </b> ["Bernal Heights", "Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42578887939501441906,  37.80071258544920453915]
+    },
+    properties: {
+      description: '<b>Name:</b> Franklin Market<br><br><b> Neighborhood: </b> ["Marina/Cow Hollow"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41755969822399663371,  37.78516955673689636797]
+    },
+    properties: {
+      description: '<b>Name:</b> T & Mw Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40679931640600841547,  37.77970886230470171085]
+    },
+    properties: {
+      description: '<b>Name:</b> Yerba Buena Market<br><br><b> Neighborhood: </b> ["SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47956000000000642558,  37.78000999999999720558]
+    },
+    properties: {
+      description: '<b>Name:</b> Mainland Market Co<br><br><b> Neighborhood: </b> ["Outer Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41245900000001256558,  37.77658900000000130603]
+    },
+    properties: {
+      description: '<b>Name:</b> Neighbor Market<br><br><b> Neighborhood: </b> ["SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47924804687500000000,  37.74264526367189631628]
+    },
+    properties: {
+      description: '<b>Name:</b> Taraval Market<br><br><b> Neighborhood: </b> ["Parkside"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41665649414100869308,  37.78459548950200286299]
+    },
+    properties: {
+      description: '<b>Name:</b> Tuong Phong Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40805816650400572598,  37.79542541503909802714]
+    },
+    properties: {
+      description: '<b>Name:</b> Rainbow House<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47050476074200275889,  37.78042984008789773043]
+    },
+    properties: {
+      description: '<b>Name:</b> State Market<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45931000000001631633,  37.72480000000000188720]
+    },
+    properties: {
+      description: '<b>Name:</b> Fruit Barn<br><br><b> Neighborhood: </b> ["Westwood Park"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.49283599853499993060,  37.77567291259770598799]
+    },
+    properties: {
+      description: '<b>Name:</b> Better Food Market<br><br><b> Neighborhood: </b> ["Outer Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43473819999999818720,  37.72456360000000330501]
+    },
+    properties: {
+      description: '<b>Name:</b> Yang Tze Market Number 2<br><br><b> Neighborhood: </b> ["Excelsior"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42343139648399130692,  37.78869628906250000000]
+    },
+    properties: {
+      description: '<b>Name:</b> Franklin Market<br><br><b> Neighborhood: </b> ["Lower Pacific Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42333221435498558094,  37.75984954833979401201]
+    },
+    properties: {
+      description: '<b>Name:</b> Guerrero Market & Deli<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40873718261700275889,  37.79692459106450286299]
+    },
+    properties: {
+      description: '<b>Name:</b> Wing Sun Company<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40653246641198848010,  37.75301255285739898682]
+    },
+    properties: {
+      description: '<b>Name:</b> N & V Grocery Store<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41442821919901007277,  37.78365947306159711161]
+    },
+    properties: {
+      description: '<b>Name:</b> T & L Food Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41993559999998808507,  37.76469120000000145865]
+    },
+    properties: {
+      description: '<b>Name:</b> Apple Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43421822786301333963,  37.72538982331749934929]
+    },
+    properties: {
+      description: '<b>Name:</b> Casa Lucaz 3<br><br><b> Neighborhood: </b> ["Excelsior", "Outer Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43697218596901166165,  37.72175811231139874735]
+    },
+    properties: {
+      description: '<b>Name:</b> Mi Tierrita Market<br><br><b> Neighborhood: </b> ["Excelsior", "Outer Mission", "Mission Terrace"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43541717529301138256,  37.76718139648439631628]
+    },
+    properties: {
+      description: '<b>Name:</b> Courtney Produce<br><br><b> Neighborhood: </b> ["Duboce Triangle"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41263999999999612101,  37.79983000000000004093]
+    },
+    properties: {
+      description: '<b>Name:</b> Union Street Produce Company<br><br><b> Neighborhood: </b> ["Russian Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45870969999999999800,  37.72454829999999503798]
+    },
+    properties: {
+      description: '<b>Name:</b> Power Trading Company<br><br><b> Neighborhood: </b> ["Westwood Park"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46553000000000110958,  37.71414000000000044110]
+    },
+    properties: {
+      description: '<b>Name:</b> Brotherhood Market & Deli<br><br><b> Neighborhood: </b> ["Ingleside Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43343999999999027750,  37.76572000000000173259]
+    },
+    properties: {
+      description: '<b>Name:</b> Noe Grocery<br><br><b> Neighborhood: </b> ["Duboce Triangle"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42893000000000824912,  37.73042000000000228965]
+    },
+    properties: {
+      description: '<b>Name:</b> Manila Oriental Market<br><br><b> Neighborhood: </b> ["Excelsior"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40458786487600661985,  37.79381297528740191183]
+    },
+    properties: {
+      description: '<b>Name:</b> David\'s Food Store<br><br><b> Neighborhood: </b> ["Financial District"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41548999999999125521,  37.78854000000000468162]
+    },
+    properties: {
+      description: '<b>Name:</b> Yogi Food Market<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41682959837601174513,  37.78735398547109980427]
+    },
+    properties: {
+      description: '<b>Name:</b> U N Market<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41585000000000604814,  37.75330000000000296723]
+    },
+    properties: {
+      description: '<b>Name:</b> Grocery Outlet Bargain Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46636000000000876753,  37.76048000000000115506]
+    },
+    properties: {
+      description: '<b>Name:</b> Roxie\'s Market & Deli<br><br><b> Neighborhood: </b> ["Inner Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42834999999999467946,  37.73327000000000452928]
+    },
+    properties: {
+      description: '<b>Name:</b> New Bosworth Market<br><br><b> Neighborhood: </b> ["Outer Mission", "Bernal Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39863586425799724111,  37.79094696044920453915]
+    },
+    properties: {
+      description: '<b>Name:</b> Snacks On First<br><br><b> Neighborhood: </b> ["Financial District", "SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40740680000000395466,  37.73944149999999808642]
+    },
+    properties: {
+      description: '<b>Name:</b> AMS Market<br><br><b> Neighborhood: </b> ["Bayview-Hunters Point"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41419899999999643114,  37.73873100000000135879]
+    },
+    properties: {
+      description: '<b>Name:</b> Andi\'s Market<br><br><b> Neighborhood: </b> ["Bernal Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41949999999999931788,  37.76035000000000252385]
+    },
+    properties: {
+      description: '<b>Name:</b> City Discount Meat and Grocery<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42898500000001149601,  37.76589500000000043656]
+    },
+    properties: {
+      description: '<b>Name:</b> Church Street Groceteria<br><br><b> Neighborhood: </b> ["Castro"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41788000000001090939,  37.74922999999999717602]
+    },
+    properties: {
+      description: '<b>Name:</b> Casa Guadalupe 3<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.50041999999999120519,  37.76266999999999995907]
+    },
+    properties: {
+      description: '<b>Name:</b> Clancey\'s Market & Deli<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41893365979200325455,  37.76839300990099701494]
+    },
+    properties: {
+      description: '<b>Name:</b> San Francisco Herb Company<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41830000000000211458,  37.74694999999999822649]
+    },
+    properties: {
+      description: '<b>Name:</b> Precita Food Mart<br><br><b> Neighborhood: </b> ["Bernal Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48997404815901290931,  37.75350744573429295770]
+    },
+    properties: {
+      description: '<b>Name:</b> Superb Garden Grocery<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44532312723100631047,  37.77782400731479839351]
+    },
+    properties: {
+      description: '<b>Name:</b> Golden Gate-Central Market<br><br><b> Neighborhood: </b> ["NoPa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39100646972700303650,  37.73290634155269884786]
+    },
+    properties: {
+      description: '<b>Name:</b> Big Save Market<br><br><b> Neighborhood: </b> ["Bayview-Hunters Point"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43926999999999338797,  37.78072000000000230102]
+    },
+    properties: {
+      description: '<b>Name:</b> Pearl Market<br><br><b> Neighborhood: </b> ["Anza Vista"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39111000000001183707,  37.73445999999999855845]
+    },
+    properties: {
+      description: '<b>Name:</b> Torino Grocery Market and Pizzeria<br><br><b> Neighborhood: </b> ["Bayview-Hunters Point"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41181182861299703291,  37.79547500610350141415]
+    },
+    properties: {
+      description: '<b>Name:</b> Mei Fung Grocery<br><br><b> Neighborhood: </b> ["Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40759280000000330801,  37.79489900000000091040]
+    },
+    properties: {
+      description: '<b>Name:</b> Wo Chong Company<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40767999999999915417,  37.79520999999999730790]
+    },
+    properties: {
+      description: '<b>Name:</b> YL Trading<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44467163085899130692,  37.77426910400389914457]
+    },
+    properties: {
+      description: '<b>Name:</b> Home Service Market<br><br><b> Neighborhood: </b> ["NoPa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43180847168001434966,  37.78092193603520598799]
+    },
+    properties: {
+      description: '<b>Name:</b> Third World Market<br><br><b> Neighborhood: </b> ["Fillmore", "Western Addition"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41390991210899130692,  37.78303146362299713701]
+    },
+    properties: {
+      description: '<b>Name:</b> Barah Deli & Grocery<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43187713623001400265,  37.77216720581049713701]
+    },
+    properties: {
+      description: '<b>Name:</b> O\'Looney\'s Market<br><br><b> Neighborhood: </b> ["Lower Haight"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47053000000001077296,  37.78284000000000020236]
+    },
+    properties: {
+      description: '<b>Name:</b> K & T Market<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40826000000001272383,  37.79705999999999477268]
+    },
+    properties: {
+      description: '<b>Name:</b> Tan Tan Trading<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47881070000001102471,  37.76324840000000193641]
+    },
+    properties: {
+      description: '<b>Name:</b> Sunset Irving Market<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40838788449801199931,  37.79697406217029254094]
+    },
+    properties: {
+      description: '<b>Name:</b> Dong Hing Supermarket<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40992736816400565658,  37.79821014404300427714]
+    },
+    properties: {
+      description: '<b>Name:</b> Chef Bowl<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41422260000000221680,  37.78328160000000224272]
+    },
+    properties: {
+      description: '<b>Name:</b> Golden Gate Market & Produce<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43104553222700303650,  37.77417755126949572286]
+    },
+    properties: {
+      description: '<b>Name:</b> Key Food Grocery<br><br><b> Neighborhood: </b> ["Lower Haight"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39923999999999182364,  37.72979999999999733973]
+    },
+    properties: {
+      description: '<b>Name:</b> Foods Co<br><br><b> Neighborhood: </b> ["Bayview-Hunters Point"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45019999999999527063,  37.70937999999999590273]
+    },
+    properties: {
+      description: '<b>Name:</b> Brothers Market<br><br><b> Neighborhood: </b> ["Crocker-Amazon"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41918645799199794055,  37.76512138545510310905]
+    },
+    properties: {
+      description: '<b>Name:</b> Hwa Lei Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40773010253900565658,  37.79572296142579546085]
+    },
+    properties: {
+      description: '<b>Name:</b> Ming Lee Trading<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45877838134799731051,  37.72469711303710226957]
+    },
+    properties: {
+      description: '<b>Name:</b> Winson Supermarket<br><br><b> Neighborhood: </b> ["Westwood Park"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40819318945499105666,  37.79614461180700146770]
+    },
+    properties: {
+      description: '<b>Name:</b> D&T Market<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41318000000001120497,  37.78365999999999758074]
+    },
+    properties: {
+      description: '<b>Name:</b> The Battambang Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48232079999998234143,  37.76334220000000385653]
+    },
+    properties: {
+      description: '<b>Name:</b> Heartland<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.50572999999999979082,  37.76021989999999561860]
+    },
+    properties: {
+      description: '<b>Name:</b> Western Sunset Market<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.48159341514099196502,  37.76333436369900198315]
+    },
+    properties: {
+      description: '<b>Name:</b> S & B Supermarket<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.38807859999998584044,  37.74179529999999971324]
+    },
+    properties: {
+      description: '<b>Name:</b> 3M Bayview Market<br><br><b> Neighborhood: </b> ["Bayview-Hunters Point"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41830400000000622640,  37.75453900000000118098]
+    },
+    properties: {
+      description: '<b>Name:</b> Lucky Pork Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41391000000001554326,  37.78302999999999656211]
+    },
+    properties: {
+      description: '<b>Name:</b> Azaal Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41760520000001122298,  37.78521359999999873480]
+    },
+    properties: {
+      description: '<b>Name:</b> T & M Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47830240000000401324,  37.74848570000000336222]
+    },
+    properties: {
+      description: '<b>Name:</b> Lincoln Market<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44639999999999702140,  37.71115999999999957026]
+    },
+    properties: {
+      description: '<b>Name:</b> Philippine Delicacies<br><br><b> Neighborhood: </b> ["Crocker-Amazon"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42363999999999180091,  37.76452000000000452928]
+    },
+    properties: {
+      description: '<b>Name:</b> K & D Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43637941777700461898,  37.78564833104609732572]
+    },
+    properties: {
+      description: '<b>Name:</b> Pacific Food Mart<br><br><b> Neighborhood: </b> ["Lower Pacific Heights"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40766040000001169119,  37.79778129999999691790]
+    },
+    properties: {
+      description: '<b>Name:</b> Sun Moon Market<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill", "Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41447716951400082053,  37.75744020938870448845]
+    },
+    properties: {
+      description: '<b>Name:</b> La Bodeguita Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46198999999998591193,  37.72167000000000314230]
+    },
+    properties: {
+      description: '<b>Name:</b> Cool Guys Market<br><br><b> Neighborhood: </b> ["Ingleside"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40806640559499385290,  37.75918124238179984786]
+    },
+    properties: {
+      description: '<b>Name:</b> New Hampshire Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42282000000000152795,  37.75382000000000459750]
+    },
+    properties: {
+      description: '<b>Name:</b> 23rd & Guerrero Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41421000000001129138,  37.78631000000000028649]
+    },
+    properties: {
+      description: '<b>Name:</b> City Supermarket<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44295270000000641630,  37.77446110000000345508]
+    },
+    properties: {
+      description: '<b>Name:</b> Parkside Market<br><br><b> Neighborhood: </b> ["NoPa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41411999999999693500,  37.79064000000000334012]
+    },
+    properties: {
+      description: '<b>Name:</b> Pine & Jones Market<br><br><b> Neighborhood: </b> ["Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40858502432800491988,  37.79769796709300067050]
+    },
+    properties: {
+      description: '<b>Name:</b> Tai Hing Market<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill", "Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40544229999999004121,  37.79610179999999530764]
+    },
+    properties: {
+      description: '<b>Name:</b> People\'s Grocery<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40768810000000144100,  37.79582949999999641477]
+    },
+    properties: {
+      description: '<b>Name:</b> Wing Li Trading<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40526580810498558094,  37.71154785156250000000]
+    },
+    properties: {
+      description: '<b>Name:</b> La Loma Produce No 2<br><br><b> Neighborhood: </b> ["Visitacion Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43855864773000519108,  37.77766249747200077991]
+    },
+    properties: {
+      description: '<b>Name:</b> Transfer Market<br><br><b> Neighborhood: </b> ["NoPa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43626999999999327429,  37.71361999999999881084]
+    },
+    properties: {
+      description: '<b>Name:</b> Cordova Market<br><br><b> Neighborhood: </b> ["Crocker-Amazon"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45366000000001349690,  37.74376999999999782176]
+    },
+    properties: {
+      description: '<b>Name:</b> Miraloma Market<br><br><b> Neighborhood: </b> ["Miraloma Park"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42505645751998599735,  37.77774429321289773043]
+    },
+    properties: {
+      description: '<b>Name:</b> Grove Street Market<br><br><b> Neighborhood: </b> ["Hayes Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40928000000000963610,  37.80210000000000292175]
+    },
+    properties: {
+      description: '<b>Name:</b> Napoli Market<br><br><b> Neighborhood: </b> ["North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45082780718799142505,  37.77338929474350237570]
+    },
+    properties: {
+      description: '<b>Name:</b> Cindy\'s Market<br><br><b> Neighborhood: </b> ["NoPa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42684173584000006940,  37.74839019775389914457]
+    },
+    properties: {
+      description: '<b>Name:</b> Modern Market<br><br><b> Neighborhood: </b> ["Noe Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41299060000000054060,  37.78583460000000115997]
+    },
+    properties: {
+      description: '<b>Name:</b> Express X-Press XPress Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41941070556600834607,  37.76603317260740055872]
+    },
+    properties: {
+      description: '<b>Name:</b> Fida\'s Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40836809999998990861,  37.71522199999999713782]
+    },
+    properties: {
+      description: '<b>Name:</b> Teddy Grocery<br><br><b> Neighborhood: </b> ["Visitacion Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47650520000001961307,  37.74290129999999976462]
+    },
+    properties: {
+      description: '<b>Name:</b> G & Z Lucky<br><br><b> Neighborhood: </b> ["Parkside"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40909999999999513420,  37.79887000000000085720]
+    },
+    properties: {
+      description: '<b>Name:</b> Big Star Grocery<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.47886657714799696350,  37.78004837036129259786]
+    },
+    properties: {
+      description: '<b>Name:</b> Richmond Produce<br><br><b> Neighborhood: </b> ["Outer Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40858300000000724594,  37.77840659999999672891]
+    },
+    properties: {
+      description: '<b>Name:</b> Starco Mart<br><br><b> Neighborhood: </b> ["SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40804170000001249718,  37.79690300000000036107]
+    },
+    properties: {
+      description: '<b>Name:</b> Gum Sing Market<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.49726867675799724111,  37.73811340332029828915]
+    },
+    properties: {
+      description: '<b>Name:</b> Sunset Supermarket<br><br><b> Neighborhood: </b> ["Parkside"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40563190000001725366,  37.78544720000000012305]
+    },
+    properties: {
+      description: '<b>Name:</b> Trader Joe\'s<br><br><b> Neighborhood: </b> ["Union Square", "Financial District", "SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42511749267599441282,  37.80240631103520598799]
+    },
+    properties: {
+      description: '<b>Name:</b> Amro Market<br><br><b> Neighborhood: </b> ["Marina/Cow Hollow"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43247029999999142547,  37.78297050000000467662]
+    },
+    properties: {
+      description: '<b>Name:</b> Jai Ho Indian Grocery Store<br><br><b> Neighborhood: </b> ["Fillmore", "Western Addition"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42021843791000890178,  37.76506103575229644775]
+    },
+    properties: {
+      description: '<b>Name:</b> Casa Thai<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.49018000000000938599,  37.75389000000000550017]
+    },
+    properties: {
+      description: '<b>Name:</b> Noreiga Market<br><br><b> Neighborhood: </b> ["Outer Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43807983398399130692,  37.77796173095699572286]
+    },
+    properties: {
+      description: '<b>Name:</b> Save-More Market<br><br><b> Neighborhood: </b> ["Alamo Square"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41586850000000197269,  37.78429710000000341097]
+    },
+    properties: {
+      description: '<b>Name:</b> Servwell Market Liquors<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42777999999999849479,  37.77646000000000015007]
+    },
+    properties: {
+      description: '<b>Name:</b> Hayes Market<br><br><b> Neighborhood: </b> ["Hayes Valley", "Alamo Square"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41630000000000677574,  37.78654000000000223736]
+    },
+    properties: {
+      description: '<b>Name:</b> Geary & Hyde Market<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41491504013499991288,  37.78272338211539960184]
+    },
+    properties: {
+      description: '<b>Name:</b> Central Tower Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40825653076200296709,  37.79701995849610085543]
+    },
+    properties: {
+      description: '<b>Name:</b> Fruit City<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40951538085899130692,  37.79775238037110085543]
+    },
+    properties: {
+      description: '<b>Name:</b> Yut Hing Food Company<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41471000000001367880,  37.78479999999999705551]
+    },
+    properties: {
+      description: '<b>Name:</b> Amigo\'s Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40536302328099793613,  37.71178498864170336446]
+    },
+    properties: {
+      description: '<b>Name:</b> Leland Market<br><br><b> Neighborhood: </b> ["Visitacion Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44033813476600869308,  37.71576309204100141415]
+    },
+    properties: {
+      description: '<b>Name:</b> GM Market<br><br><b> Neighborhood: </b> ["Crocker-Amazon"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43994999999999606644,  37.72872999999999876763]
+    },
+    properties: {
+      description: '<b>Name:</b> Red Sea Market<br><br><b> Neighborhood: </b> ["Outer Mission", "Mission Terrace"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42277379999998743187,  37.77233650000000153568]
+    },
+    properties: {
+      description: '<b>Name:</b> Valmar Supermarket<br><br><b> Neighborhood: </b> ["SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41157531738299724111,  37.77593994140620026201]
+    },
+    properties: {
+      description: '<b>Name:</b> Unimart<br><br><b> Neighborhood: </b> ["SoMa"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43129999999999313332,  37.77568000000000125738]
+    },
+    properties: {
+      description: '<b>Name:</b> Tim\'s Market<br><br><b> Neighborhood: </b> ["Alamo Square"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41833999999998638941,  37.74964500000000100499]
+    },
+    properties: {
+      description: '<b>Name:</b> Samiramis Imports<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41826200000001279022,  37.78443099999999787997]
+    },
+    properties: {
+      description: '<b>Name:</b> Hong Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43365478515600841547,  37.73471450805660509786]
+    },
+    properties: {
+      description: '<b>Name:</b> Buddie\'s Super Market<br><br><b> Neighborhood: </b> ["Glen Park"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41363290000001029512,  37.74948239999999799466]
+    },
+    properties: {
+      description: '<b>Name:</b> Rubin Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46296999999999854936,  37.78275999999999612555]
+    },
+    properties: {
+      description: '<b>Name:</b> T & L Market<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45641326904301138256,  37.71300888061519884786]
+    },
+    properties: {
+      description: '<b>Name:</b> Ana\'s Market<br><br><b> Neighborhood: </b> ["Oceanview"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41783142089799696350,  37.76015853881839490214]
+    },
+    properties: {
+      description: '<b>Name:</b> All Season Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41113044321500069600,  37.78418116271500082348]
+    },
+    properties: {
+      description: '<b>Name:</b> Daldas Grocery<br><br><b> Neighborhood: </b> ["Tenderloin", "Union Square"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40864939987699244739,  37.79821045696739645336]
+    },
+    properties: {
+      description: '<b>Name:</b> Sun Kau Shing Company<br><br><b> Neighborhood: </b> ["Russian Hill", "North Beach/Telegraph Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41971588134799731051,  37.76259994506839490214]
+    },
+    properties: {
+      description: '<b>Name:</b> Tony\'s Grocery Market<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40593719999999677839,  37.79413989999999756719]
+    },
+    properties: {
+      description: '<b>Name:</b> Produce Land<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41976000000001079115,  37.76160000000000138698]
+    },
+    properties: {
+      description: '<b>Name:</b> Duc Loi Supermarket<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42551000000000271939,  37.79860989999999532074]
+    },
+    properties: {
+      description: '<b>Name:</b> Sherman Market<br><br><b> Neighborhood: </b> ["Marina/Cow Hollow"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41298720240600061970,  37.78491675853729958590]
+    },
+    properties: {
+      description: '<b>Name:</b> Starlight Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40801200000001358603,  37.79606599999999616557]
+    },
+    properties: {
+      description: '<b>Name:</b> City Super<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40586850000001106764,  37.79399109999999950560]
+    },
+    properties: {
+      description: '<b>Name:</b> Mow Lee Shing Kee & Company<br><br><b> Neighborhood: </b> ["Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43843814033701278277,  37.76063377441720803063]
+    },
+    properties: {
+      description: '<b>Name:</b> The Rainbow Market<br><br><b> Neighborhood: </b> ["Castro"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.44564779102800855526,  37.70970493555070390812]
+    },
+    properties: {
+      description: '<b>Name:</b> Lowell Market<br><br><b> Neighborhood: </b> ["Crocker-Amazon"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41262389999999982138,  37.78505450000000109867]
+    },
+    properties: {
+      description: '<b>Name:</b> Young Ellis Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41570964455600289966,  37.78348848223689770975]
+    },
+    properties: {
+      description: '<b>Name:</b> Cadillac Grocery<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46301777660801235470,  37.76220045983789930233]
+    },
+    properties: {
+      description: '<b>Name:</b> Golden Bear Trading Company<br><br><b> Neighborhood: </b> ["Inner Sunset"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41609350000000233649,  37.78361079999999816437]
+    },
+    properties: {
+      description: '<b>Name:</b> New Princess Market<br><br><b> Neighborhood: </b> ["Tenderloin"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42214202880899165393,  37.80530929565429687500]
+    },
+    properties: {
+      description: '<b>Name:</b> Michaelis Food Store<br><br><b> Neighborhood: </b> ["Russian Hill", "Fisherman\'s Wharf"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40851059556001700912,  37.79747352004049787411]
+    },
+    properties: {
+      description: '<b>Name:</b> The Best Foods Produce<br><br><b> Neighborhood: </b> ["North Beach/Telegraph Hill", "Chinatown"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41986229999999125084,  37.78654360000000167474]
+    },
+    properties: {
+      description: '<b>Name:</b> Green Apple Market<br><br><b> Neighborhood: </b> ["Lower Nob Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.41923300000000551790,  37.76035699999999906140]
+    },
+    properties: {
+      description: '<b>Name:</b> City Discount Meat & Grocery<br><br><b> Neighborhood: </b> ["Mission"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43621999999999161446,  37.77479000000000297632]
+    },
+    properties: {
+      description: '<b>Name:</b> Alamo Square Market & Deli<br><br><b> Neighborhood: </b> ["Alamo Square"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46018629999998950098,  37.78101439999999655583]
+    },
+    properties: {
+      description: '<b>Name:</b> Star Dust Market<br><br><b> Neighborhood: </b> ["Inner Richmond"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40578999999999609827,  37.70862999999999942702]
+    },
+    properties: {
+      description: '<b>Name:</b> Grocery Outlet Bargain Market<br><br><b> Neighborhood: </b> ["Visitacion Valley"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40218904918998532594,  37.75894740270899774259]
+    },
+    properties: {
+      description: '<b>Name:</b> Chiotras Grocery<br><br><b> Neighborhood: </b> ["Potrero Hill"] <br><br><b>Average price:</b> 1.000000<br><br>'
+    }
+  }],
+          },
+        })
+
+        map.addLayer({
+          id: 'points',
+          type: 'circle',
+          paint: {
+            'circle-blur': 0.1,
+            'circle-radius': {
+              base: 2,
+              stops: [[11, 5], [14, 8], [22, 180]],
+            },
+            'circle-color': {
+              property: 'cost',
+              default: '#FF7616',
+              stops: [
+                [0.0, 'blue'], 
+                [400, 'green'], 
+                [800, 'yellow'], 
+                [1500, 'orange'], 
+                [13000, 'red'], 
+//                [0.0, '#FFAD27'], // least dense
+//                [500, '#F26401'], // light orange
+//                [1200, '#C33501'], // (our base orange)
+//                [13000, '#900149'], // (most density)
+              ],
+            },
+            'circle-opacity': 0.7,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': 'black',
+            'circle-stroke-opacity': 0.5,
+          },
+          source: 'points',
+        })
+
+	map.setCenter([-122.4194, 37.7749])
+        map.zoomTo(12)
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'points', function (e, i) {
+
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'points', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'points', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
+    map.on('load', onMapLoad)
+
+</script>
