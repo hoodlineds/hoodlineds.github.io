@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+    .filter-group {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        border-radius: 3px;
+        width: 120px;
+        color: #fff;
+    }
+
+    .filter-group input[type=checkbox]:first-child + label {
+        border-radius: 3px 3px 0 0;
+    }
+
+    .filter-group label:last-child {
+        border-radius: 0 0 3px 3px;
+        border: none;
+    }
+
+    .filter-group input[type=checkbox] {
+        display: none;
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #3386c0;
+        text-transform: capitalize;
+    }
+
+    .filter-group input[type=checkbox] + label:hover,
+    .filter-group input[type=checkbox]:checked + label {
+        background-color: #4ea0da;
+    }
+
+    .filter-group input[type=checkbox]:checked + label:before {
+        content: '✔';
+        margin-right: 5px;
+    }
+</style>
+
+<div id='map' style='width: 100%; height: 100%;'></div>
+<nav id='filter-group' class='filter-group'></nav>
+
+<script>
+
+    function adjustFilters(map) {
+        var input1 = document.getElementById('input1');
+        var input2 = document.getElementById('input2');
+        // var input3 = document.getElementById('input3');
+
+        filt_list = ["any"]
+        
+        filt1 = ['==', 'chain_name', "Whole Foods"]
+        if (input1.checked) {filt_list.push(filt1);}
+        
+        filt2 = ['==', 'chain_name', "Walmart"]
+        if (input2.checked) {filt_list.push(filt2);}
+        
+        // filt3 = ['==', 'chain_name', CHAIN3_HERE]
+        // if (input3.checked) {filt_list.push(filt3);}
+
+        map.setFilter("points", filt_list);
+    }
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHdhc2NvIiwiYSI6ImNpdTRtdW9sZjBoaDkydHBnY3FiaGI2bDEifQ.9Gf5y4pu-NhN6s_L0vdd9Q'
+
+    var filterGroup = document.getElementById('filter-group');
+    
+    map = new mapboxgl.Map({
+      container: document.getElementById("map"),
+      logoPosition: 'bottom-right',
+      style: 'mapbox://styles/dwasco/cj0n4fxjp003q2rnyu3r18dd1',
+    });
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
+
+    onMapLoad = () => {
+        isMapLoaded = true
+        map.addSource('points', {
+          type: 'geojson',
+          cluster: false,
+          clusterMaxZoom: 16, // Max zoom to cluster points on
+          clusterRadius: 2.5, // Radius of each cluster when clustering points (defaults to 50)
+          data: {
+            type: 'FeatureCollection',
+            features: [
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.98613140000000498731,  37.51884710000000211494]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Fremont<br><a href=\'https://www.yelp.com/biz/walmart-fremont-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94538',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.79004999999999370175,  38.52846999999999866304]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Windsor<br><a href=\'https://www.yelp.com/biz/walmart-windsor-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95492',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.76768493652299696350,  37.69976425170899858585]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Livermore<br><a href=\'https://www.yelp.com/biz/walmart-livermore-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94551',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.17770618330499132753,  37.71454508095279578583]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: San Leandro<br><a href=\'https://www.yelp.com/biz/walmart-san-leandro-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94577',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.39378999999999564352,  38.71270999999999418151]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Antelope<br><a href=\'https://www.yelp.com/biz/walmart-antelope-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95843',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.71373700000000894761,  38.36699799999999527245]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Rohnert Park<br><a href=\'https://www.yelp.com/biz/walmart-rohnert-park-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94928',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.88680471022499318678,  37.69846602056890105814]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Pleasanton<br><a href=\'https://www.yelp.com/biz/walmart-pleasanton-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94588',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.10941314697299731051,  37.99695205688480115214]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Martinez<br><a href=\'https://www.yelp.com/biz/walmart-martinez-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94553',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.86808661944999698790,  38.00908447531820399945]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Pittsburg<br><a href=\'https://www.yelp.com/biz/walmart-pittsburg-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94565',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.74091999999998847670,  38.67589000000000254431]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Woodland<br><a href=\'https://www.yelp.com/biz/walmart-woodland-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95776',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.76171311401898833537,  37.96344986975729796086]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Antioch<br><a href=\'https://www.yelp.com/biz/walmart-antioch-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94531',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.29191265720301373676,  38.59609908631929897638]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Rancho Cordova<br><a href=\'https://www.yelp.com/biz/walmart-rancho-cordova-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95670',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.13152710648000720539,  37.68825163643579401196]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: San Leandro<br><a href=\'https://www.yelp.com/biz/walmart-san-leandro-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94579',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.94243999999999061856,  37.51142000000000109594]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Fremont<br><a href=\'https://www.yelp.com/biz/walmart-fremont-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94539',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.06713100000000338241,  37.60426300000000310320]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Union City<br><a href=\'https://www.yelp.com/biz/walmart-union-city-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94587',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.39158999999999366537,  38.41154999999999830607]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Elk Grove<br><a href=\'https://www.yelp.com/biz/walmart-elk-grove-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95758',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.41624399999999184274,  38.39132399999999734064]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Elk Grove<br><a href=\'https://www.yelp.com/biz/walmart-elk-grove-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95757',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.32838439941400565658,  37.97982788085939631628]
+    },
+    properties: {
+      description: 'Walmart<br>Yelp city: Richmond<br><a href=\'https://www.yelp.com/biz/walmart-richmond-14?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94806',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.77352420000001131939,  37.31408829999999454685]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: San Jose<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-san-jose-8?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95135',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.99526000000001602075,  38.34418000000000148475]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Vacaville<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-vacaville-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95687',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.76411437988299724111,  38.66131210327149858585]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Woodland<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-woodland-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95776',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.27176489999999375868,  38.67699000000000353339]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Citrus Heights<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-citrus-heights-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95610',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.92964999999999520242,  37.72948000000000234877]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: San Ramon<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-san-ramon-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94583',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.32509890000000041255,  38.66109480000000075961]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Carmichael<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-carmichael-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95608',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.95114135742200289769,  38.35085678100589490214]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Vacaville<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-vacaville-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95687',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.69315000000000281943,  38.36167999999999977945]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Rohnert Park<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-rohnert-park?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95695',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.39907999999999788088,  38.61722000000000321052]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Sacramento<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-sacramento-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95821',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.39141799999998738713,  38.41000300000000322598]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Elk Grove<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-elk-grove-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95758',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.78778999999998688963,  38.68005000000000137561]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Woodland<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-woodland-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95695',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.23987999999999942702,  38.78376989999999580050]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Rocklin<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-rocklin-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95677',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.22486999999999568445,  38.74282999999999788088]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Granite Bay<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-granite-bay-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95746',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.87710900000000435739,  37.69006550000000288492]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Pleasanton<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-pleasanton-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94566',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.25458500000000583441,  38.12674000000000518185]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Vallejo<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-vallejo-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94589',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.98551215231400135508,  37.39003603610449744110]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Santa Clara<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-santa-clara-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95054',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.87168121268699394477,  37.31568876649020438663]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: San Jose<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-san-jose-10?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95112',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.29216766357400558718,  38.00366210937500000000]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: Stockton<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-stockton-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95210',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.98846734337799091463,  37.29149551929349826196]
+    },
+    properties: {
+      description: 'Walmart Neighborhood Market<br>Yelp city: San Jose<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-san-jose-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95129',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.38408999999998627572,  38.60855999999999710326]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Sacramento<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-sacramento-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95821',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.29011799999999254851,  38.78801099999999735246]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Roseville<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-roseville-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95678',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.43372499999999547526,  38.49887199999999864986]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Sacramento<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-sacramento-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95823',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.03432490000000143482,  38.27883329999999517668]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Fairfield<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-fairfield?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94533',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.99020000000000152340,  38.24237500000000267164]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Suisun City<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-suisun-city?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94585',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.37675476074200275889,  38.05016326904300427714]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Stockton<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-stockton-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95219',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.28356000000000847194,  38.30919999999999703277]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Napa<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-napa?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94558',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.39378999999999564352,  38.71270999999999418151]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Antelope<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-antelope-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95843',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.36988999999998384283,  38.48268000000000199634]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Sacramento<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-sacramento-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95829',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.25318899999999189276,  38.18325399999999802958]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: American Canyon<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-american-canyon?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94503',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.95969999999999799911,  38.36239000000000487489]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Vacaville<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-vacaville?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95687',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.87994237523500373754,  37.25543887102570295156]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: San Jose<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-san-jose-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95118',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.92102913624599125342,  37.43112528442579645116]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Milpitas<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-milpitas?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95035',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.55128999999999450665,  37.00822000000000144837]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Gilroy<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-gilroy?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95020',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.65529599999999277316,  37.14955100000000243199]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Morgan Hill<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-morgan-hill?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95037',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.38613000000000852197,  38.64994990000000285590]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: North Highlands<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-north-highlands?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95660',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.47220000000000084128,  37.75222999999999728971]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Tracy<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-tracy-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95304',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.33203700000001390436,  38.70435700000000167620]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Sacramento<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-sacramento-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95842',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.30485534668001434966,  38.28999710083009944128]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Galt<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-galt?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95632',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.22297496577600384171,  38.67909226840929193258]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Orangevale<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-orangevale?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95662',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.55010700000001122589,  38.58728200000000185810]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: West Sacramento<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-west-sacramento-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95605',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.27346000000001424723,  38.02297999999999689180]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Stockton<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-stockton-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95212',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.29511200000001736043,  38.68995999999999924057]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Citrus Heights<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-citrus-heights-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95621',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.82048797607400558718,  38.47121429443360085543]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: Dixon<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-dixon?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95620',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.86031065881300605724,  37.33067879501539465537]
+    },
+    properties: {
+      description: 'Walmart Supercenter<br>Yelp city: San Jose<br><a href=\'https://www.yelp.com/biz/walmart-supercenter-san-jose-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95122',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.45452000000000225555,  38.49463000000000079126]
+    },
+    properties: {
+      description: 'Walmart- Neighborhood Market<br>Yelp city: Sacramento<br><a href=\'https://www.yelp.com/biz/walmart-neighborhood-market-sacramento-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95823',
+      chain_name: "Walmart"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.98497340000001543103,  37.55500700000000335876]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Fremont<br><a href=\'https://www.yelp.com/biz/whole-foods-market-fremont?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94538',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.01416000000000394721,  36.97885000000000133014]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Santa Cruz<br><a href=\'https://www.yelp.com/biz/whole-foods-market-santa-cruz-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95062',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.87703700000001560966,  37.24925199999999847478]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Jose<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-jose-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95118',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.52568000000000836280,  37.90244000000000568207]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Mill Valley<br><a href=\'https://www.yelp.com/biz/whole-foods-market-mill-valley-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94941',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.73147570000000428081,  38.45908449999999589863]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Santa Rosa<br><a href=\'https://www.yelp.com/biz/whole-foods-market-santa-rosa-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95401',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.29766659999999944830,  37.88085029999999875372]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Berkeley<br><a href=\'https://www.yelp.com/biz/whole-foods-market-berkeley-8?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94710',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.30626699999999118518,  38.32344000000000505679]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Napa<br><a href=\'https://www.yelp.com/biz/whole-foods-market-napa-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94558',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.93147510000000011132,  37.29265320000000372147]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Campbell<br><a href=\'https://www.yelp.com/biz/whole-foods-market-campbell-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95008',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.97501470000001688732,  37.38073389999999562860]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Santa Clara<br><a href=\'https://www.yelp.com/biz/whole-foods-market-santa-clara-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95054',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.05531140000000789314,  37.89268779999999736674]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Walnut Creek<br><a href=\'https://www.yelp.com/biz/whole-foods-market-walnut-creek-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94596',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.43085000000000661657,  37.75187000000000381306]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Francisco<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-francisco-23?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94114',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.46211999999999875399,  38.29135000000000133014]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Sonoma<br><a href=\'https://www.yelp.com/biz/whole-foods-market-sonoma-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95476',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.56584999999999752163,  38.10580000000000211458]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Novato<br><a href=\'https://www.yelp.com/biz/whole-foods-market-novato-8?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94945',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42338000000000874934,  37.78992000000000217597]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Francisco<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-francisco-22?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94109',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.15956729999999197389,  37.44238929999999498932]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Palo Alto<br><a href=\'https://www.yelp.com/biz/whole-foods-market-palo-alto-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94301',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45462420000001202425,  37.72387020000000745767]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Francisco<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-francisco-24?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94112',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.88984240000000625059,  37.70576439999999962538]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Dublin<br><a href=\'https://www.yelp.com/biz/whole-foods-market-dublin-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94568',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.42713970000001211247,  37.76835339999999519023]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Francisco<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-francisco-21?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94114',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.26601490000000183045,  38.76691010000000403579]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Roseville<br><a href=\'https://www.yelp.com/biz/whole-foods-market-roseville-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95678',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.63438999999999623469,  38.24110999999999904730]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Petaluma<br><a href=\'https://www.yelp.com/biz/whole-foods-market-petaluma-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94952',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.45283247228300638199,  37.76951677494010084501]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Francisco<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-francisco-26?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94117',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.40266000000001156423,  37.76410999999999518195]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Francisco<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-francisco-25?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94107',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.53627000000000180080,  37.89607000000000169848]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Mill Valley<br><a href=\'https://www.yelp.com/biz/whole-foods-market-mill-valley-6?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94941',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.82392000000000109594,  38.40384000000000241926]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Sebastopol<br><a href=\'https://www.yelp.com/biz/whole-foods-market-sebastopol-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95472',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.96261289999999632983,  37.23601310000000097489]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Los Gatos<br><a href=\'https://www.yelp.com/biz/whole-foods-market-los-gatos-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95032',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.11718359999998995136,  37.89344220000000262871]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Lafayette<br><a href=\'https://www.yelp.com/biz/whole-foods-market-lafayette-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94549',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.29217470000000389518,  37.54428349999999880993]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Mateo<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-mateo-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94403',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.51681000000000665295,  37.97130999999999545480]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Rafael<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-rafael-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94901',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.23167490000000157124,  37.48229929999999399115]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Redwood City<br><a href=\'https://www.yelp.com/biz/whole-foods-market-redwood-city-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94062',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.96355049999998243493,  36.97427370000000479422]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Capitola<br><a href=\'https://www.yelp.com/biz/whole-foods-market-capitola-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95010',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.26008999999999105057,  37.85544000000000153250]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Berkeley<br><a href=\'https://www.yelp.com/biz/whole-foods-market-berkeley-7?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94705',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.26059999999999661213,  37.81294000000000465889]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Oakland<br><a href=\'https://www.yelp.com/biz/whole-foods-market-oakland-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94612',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.96124690000000612145,  37.76174589999999398060]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Ramon<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-ramon-2?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94583',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.01535900000000367527,  37.92592800000000607952]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Walnut Creek<br><a href=\'https://www.yelp.com/biz/whole-foods-market-walnut-creek-4?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94598',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.39964950000000953878,  37.78098440000000124428]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Francisco<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-francisco-27?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94107',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.11065000000000679847,  37.39896999999999849251]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Los Altos<br><a href=\'https://www.yelp.com/biz/whole-foods-market-los-altos-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 94022',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.90481350000000304590,  37.33217400000000196769]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: San Jose<br><a href=\'https://www.yelp.com/biz/whole-foods-market-san-jose-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95126',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-121.36383200000000215368,  38.59633200000000385899]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Sacramento<br><a href=\'https://www.yelp.com/biz/whole-foods-market-sacramento-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95864',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.67389569999998855110,  38.44220359999999914180]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Santa Rosa<br><a href=\'https://www.yelp.com/biz/whole-foods-market-santa-rosa-5?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95405',
+      chain_name: "Whole Foods"
+    }
+  },
+
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.03958870000001013523,  37.32360520000000292384]
+    },
+    properties: {
+      description: 'Whole Foods Market<br>Yelp city: Cupertino<br><a href=\'https://www.yelp.com/biz/whole-foods-market-cupertino-3?adjust_creative=ripple&utm_campaign=yelp_feed&utm_medium=feed_v2&utm_source=ripple\'>Yelp page</a><br>zipcode: 95014',
+      chain_name: "Whole Foods"
+    }
+  }],
+          },
+        })
+
+        map.addLayer({
+          id: 'points',
+          type: 'circle',
+          paint: {
+            'circle-blur': 0.1,
+            'circle-radius': {
+              base: 2,
+              stops: [[11, 5], [14, 8], [22, 180]],
+            },
+            'circle-color': {
+              property: 'chain_name',
+              default: '#FF7616',
+              type: 'categorical',
+              stops: [
+                  ["Whole Foods", "#fbb03b"],["Walmart", "#223b53"] 
+              ],
+            },
+            'circle-opacity': 0.7,
+            'circle-stroke-width': 0,
+            'circle-stroke-color': 'black',
+            'circle-stroke-opacity': 0.5,
+          },
+          source: 'points',
+        })
+
+        // Add checkbox and label elements for each chain
+        var input1 = document.createElement('input');
+        input1.type = 'checkbox';
+        input1.id = 'input1';
+        input1.checked = true;
+        filterGroup.appendChild(input1);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input1');
+        label.textContent = "Whole Foods";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer. 
+        var input2 = document.createElement('input');
+        input2.type = 'checkbox';
+        input2.id = 'input2';
+        input2.checked = true;
+        filterGroup.appendChild(input2);
+
+        var label = document.createElement('label');
+        label.setAttribute('for', 'input2');
+        label.textContent = "Walmart";
+        filterGroup.appendChild(label);
+
+        // Add checkbox and label elements for the layer.
+        // var input3 = document.createElement('input');
+        // input3.type = 'checkbox';
+        // input3.id = 'input3';
+        // input3.checked = true;
+        // filterGroup.appendChild(input3);
+
+        // var label = document.createElement('label');
+        // label.setAttribute('for', 'input3');
+        // label.textContent = CHAIN3_HERE;
+        // filterGroup.appendChild(label);
+
+        // When the checkbox changes, update the visibility of the layer.
+        //input1.addEventListener('change', function(e) {console.log("Alive")});
+        input1.addEventListener('change', function(e) {adjustFilters(map);});        
+        input2.addEventListener('change', function(e) {adjustFilters(map);});
+        // input3.addEventListener('change', function(e) {adjustFilters(map);});
+
+	      map.setCenter([-121.92459105121067, 38.008939108082224])
+        map.zoomTo(8)
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'points', function (e, i) {
+
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'points', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'points', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
+    map.on('load', onMapLoad)
+
+</script>
